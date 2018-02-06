@@ -1,23 +1,38 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <router-view/>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'App'
 }
 </script>
 
-<style>
+<style lang="scss">
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+* {
+  box-sizing: border-box;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .center-box {
+    margin: auto;
+    padding-bottom: 5%;
+  }
 }
 </style>
