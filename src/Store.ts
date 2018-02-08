@@ -2,7 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import FirestoreDatabaseConnection from './FirestoreDatabaseConnection'
 import { Actions, Mutations } from './constants'
-import { User, Project } from './types/common'
+import { Project } from './types/common'
+import User from './models/User'
+import Transfer from './models/Transfer'
 
 Vue.use(Vuex)
 
@@ -26,13 +28,13 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    [Actions.GET_USER_PROJECTS]: async ({ state, commit }) => {
+    [Actions.GET_USER_PROJECTS]: async ({ state, commit, dispatch }) => {
       try {
         let projects: object = await db.getProjects(state.user.uid)
         commit(Mutations.LOAD_PROJECTS, projects)
+        console.log('Projects loaded, open project')
         let projectId = 'yGuXxTD9cdueFvHHOisB'
-        commit(Mutations.UPDATE_PROJECT_ID, projectId)
-        console.log('Projects loaded')
+        dispatch(Actions.OPEN_PROJECT, projectId)
       } catch (error) {
         debugger
       }
@@ -54,6 +56,19 @@ const store = new Vuex.Store({
       // } else {
       //   console.warn('No projects found')
       // }
+    },
+    [Actions.OPEN_PROJECT]: async ({ state, commit }, projectId) => {
+      try {
+        let project = state.projects[projectId]
+        if (project.transfers === undefined) {
+          // Load transfers
+          let transfers: Transfer[] = await db.loadTransfers(projectId)
+          project.transfers = transfers
+        }
+        commit(Mutations.UPDATE_PROJECT_ID, projectId)
+      } catch (error) {
+        debugger
+      }
     }
   },
   mutations: {

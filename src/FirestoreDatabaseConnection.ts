@@ -1,5 +1,7 @@
 import firebase from 'firebase'
-import { User, Project } from './types/common'
+import { Project, TransferType } from './types/common'
+import User from './models/User'
+import Transfer from './models/Transfer'
 import { Collections } from './constants'
 
 class FirestoreDatabaseConnection {
@@ -68,6 +70,7 @@ class FirestoreDatabaseConnection {
           let { title, users } = projectSnapshot.data()
           let project: Project = {
             title,
+            transfers: undefined,
             users
           }
           projects[projectSnapshot.id] = project
@@ -77,6 +80,45 @@ class FirestoreDatabaseConnection {
         console.log(error)
         debugger
         return reject({ message: 'Found no projects' })
+      }
+    })
+  }
+
+  loadTransfers = async (projectId: string): Promise<Transfer[] | any> => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const projectsRef = await this.getCollectionRef(Collections.PROJECTS)
+        const transfersCollection = await (projectsRef as any)
+          .doc(projectId)
+          .collection(Collections.TRANSFERS)
+          .get()
+        let transfers: Transfer[] = []
+        transfersCollection.forEach(transferDoc => {
+          let transferData = transferDoc.data()
+          console.log(transferData)
+          let {
+            amount,
+            date,
+            transferType,
+            message,
+            paidBy,
+            receiver
+          } = transferData
+          let transfer = new Transfer(
+            amount,
+            date,
+            transferType,
+            message,
+            paidBy,
+            receiver
+          )
+          transfers.push(transfer)
+        })
+        return resolve(transfers)
+      } catch (error) {
+        console.log(error)
+        debugger
+        return reject({ message: 'Found no transfers' })
       }
     })
   }
