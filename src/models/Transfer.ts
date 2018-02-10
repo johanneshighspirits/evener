@@ -3,33 +3,51 @@ import User from './User'
 
 class Transfer {
   date: Date
-  transferType: TransferType
-  paidBy: User
-  receiver: User
   constructor(
     public amount: number,
     date: string,
-    transferType: TransferType,
+    public transferType: TransferType,
     public message: string,
-    paidBy: string,
-    receiver: string
+    public paidBy: User,
+    public receiver: User
   ) {
-    switch (transferType) {
-      case 0:
-        this.transferType = TransferType.income
-        break
-      case 1:
-        this.transferType = TransferType.payment
-        break
-      case 2:
-        this.transferType = TransferType.repayment
-        break
+    this.date = new Date(date)
+  }
+
+  shortDate = () => {
+    const options = {
+      year: '2-digit',
+      month: 'short',
+      day: 'numeric'
+    }
+    return this.date.toLocaleDateString('sv-SE', options).replace('.', '')
+  }
+
+  transferTypeToString = () => {
+    switch (this.transferType) {
+      case TransferType.income:
+        return '+'
+      case TransferType.payment:
+        return '-'
+      case TransferType.repayment:
+        return '='
       default:
+        console.error('Found no TransferType for', this.transferType)
         break
     }
-    this.paidBy = User.userFrom(paidBy)
-    this.receiver = User.userFrom(receiver)
-    this.date = new Date(date)
+  }
+
+  serialize = (uid: string) => {
+    const { date, paidBy, receiver, amount, message, transferType } = this
+    return {
+      date: date.toISOString(),
+      paidBy: paidBy ? paidBy.uid : '',
+      receiver: receiver ? receiver.uid : '',
+      amount,
+      message,
+      transferType,
+      uid
+    }
   }
 }
 

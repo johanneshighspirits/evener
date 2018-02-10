@@ -28,6 +28,16 @@ const store = new Vuex.Store({
     }
   },
   actions: {
+    [Actions.GET_USER]: async ({ state, commit, dispatch }, userInfo) => {
+      try {
+        let user: User = await db.getOrCreateUser(userInfo)
+        // Update local user?
+        commit(Mutations.LOGGED_IN, user)
+        dispatch(Actions.GET_USER_PROJECTS)
+      } catch (error) {
+        console.error(error)
+      }
+    },
     [Actions.GET_USER_PROJECTS]: async ({ state, commit, dispatch }) => {
       try {
         let projects: object = await db.getProjects(state.user.uid)
@@ -61,12 +71,23 @@ const store = new Vuex.Store({
       try {
         let project = state.projects[projectId]
         if (project.transfers === undefined) {
-          // Load transfers
-          let transfers: Transfer[] = await db.loadTransfers(projectId)
-          project.transfers = transfers
+          // Load transfers and users
+          await db.populateProject(project)
         }
         commit(Mutations.UPDATE_PROJECT_ID, projectId)
       } catch (error) {
+        debugger
+      }
+    },
+    [Actions.ADD_TRANSFER]: async (
+      { state, commit },
+      { transfer, projectId, userId }
+    ) => {
+      try {
+        await db.addTransfer(transfer, projectId, userId)
+        commit(Mutations.DISPLAY_NOTIFICATION, 'success')
+      } catch (error) {
+        commit(Mutations.DISPLAY_NOTIFICATION, error)
         debugger
       }
     }
@@ -86,6 +107,10 @@ const store = new Vuex.Store({
     },
     [Mutations.UPDATE_PROJECT_ID]: (state, projectId) => {
       state.projectId = projectId
+    },
+    /* Notifications */
+    [Mutations.DISPLAY_NOTIFICATION]: (state, message) => {
+      console.log('[NOTIFICATION]', message)
     }
   }
 })

@@ -26,13 +26,14 @@ new Vue({
         user.getIdToken().then(token => {
           console.log('accessToken received...')
         })
-        store.commit(Mutations.LOGGED_IN, {
+        let userInfo = {
           uid: user.uid,
           name: user.displayName,
           avatar: user.photoURL
-        })
+        }
+        console.log(user)
+        store.dispatch(Actions.GET_USER, userInfo)
         console.log('Logged in')
-        store.dispatch(Actions.GET_USER_PROJECTS)
         this.$router.push('/')
       } else {
         store.commit(Mutations.LOGGED_OUT)
