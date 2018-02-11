@@ -5,6 +5,10 @@
     "module": "es2015",
     "moduleResolution": "node",
     "sourceMap": true,
-    "allowSyntheticDefaultImports": true
-  }
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "allowJs": true
+  },
+  "include": ["./src/**/*"]
 }

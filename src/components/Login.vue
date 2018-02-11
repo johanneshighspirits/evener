@@ -1,17 +1,18 @@
 <template>
   <section class="center-box">
     <h1>Log in</h1>
-    <p>{{status}}</p>
-    <div id="firebaseui-auth-container" @mousedown="startLogIn"></div>
+    <p>{{ status }}</p>
+    <div id="firebaseui-auth-container" @mousedown="startLogIn"/>
   </section>
 </template>
 
 <script lang="ts">
-import firebase from 'firebase'
-import firebaseui from 'firebaseui'
+import * as firebase from 'firebase'
+import * as firebaseui from 'firebaseui'
 import '../../node_modules/firebaseui/dist/firebaseui.css'
+import Vue from 'vue'
 
-export default {
+export default Vue.extend({
   name: 'login',
   data() {
     return {
@@ -19,7 +20,7 @@ export default {
     }
   },
   methods: {
-    startLogIn: function() {
+    startLogIn() {
       this.status = 'Logging in. Please wait...'
     }
   },
@@ -41,7 +42,7 @@ export default {
       // Other config options...
     })
   }
-}
+})
 </script>
 
 <style lang="scss">

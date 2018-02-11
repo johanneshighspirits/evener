@@ -1,19 +1,23 @@
-import firebase from 'firebase'
+import * as firebase from 'firebase'
 import { Project, TransferType } from './types/common'
 import User from './models/User'
 import Transfer from './models/Transfer'
 import { UserInfo } from './types/common'
 import { Collections } from './constants'
+import { Store } from 'vuex'
+import { State } from './Store'
+
+interface FirestoreDatabaseConnection {
+  // Store a reference to vuex store
+  store: Store<State>
+
+  // unsubscribeSetListWatch: () => {}
+  // unsubscribeSongsWatch: () => {}
+}
 
 class FirestoreDatabaseConnection {
-  // Store a reference to vuex store
-  store: object
-  unsubscribeSetListWatch: () => {}
-  unsubscribeSongsWatch: () => {}
-  constructor(store: object) {
+  constructor(store: Store<State>) {
     this.store = store
-    this.unsubscribeSetListWatch = undefined
-    this.unsubscribeSongsWatch = undefined
   }
 
   getOrCreateUser = async (userInfo: UserInfo): Promise<any> => {
@@ -40,32 +44,26 @@ class FirestoreDatabaseConnection {
    * @param {string} collection - Identifier for the collection to get.
    * Possible values are: `setlists`, `users`, `invitations`
    */
-  getCollectionRef = async (collection: string): Promise<any> => {
-    return new Promise(async (resolve, reject) => {
-      const db = firebase.firestore()
-      try {
-        const ref = await db.collection(collection)
-        return resolve(ref)
-      } catch (error) {
-        return reject('Error: Found no projects. ' + error)
-      }
-    })
+  getCollectionRef = async (
+    collection: string
+  ): Promise<firebase.firestore.CollectionReference> => {
+    return firebase.firestore().collection(collection)
   }
 
   getProjects = async (uid: string): Promise<object> => {
     return new Promise(async (resolve, reject) => {
       try {
         const projectsRef = await this.getCollectionRef(Collections.PROJECTS)
-        const userProjects = await (projectsRef as any)
+        const userProjects = await projectsRef
           .where(`users.${uid}`, '==', true)
           .get()
-        let projects: object = {}
+        let projects: { [key: string]: Project } = {}
         userProjects.forEach(projectSnapshot => {
           let { title, users } = projectSnapshot.data()
           let project: Project = {
             id: projectSnapshot.id,
             title,
-            transfers: undefined,
+            transfers: [],
             users
           }
           projects[projectSnapshot.id] = project
@@ -90,14 +88,19 @@ class FirestoreDatabaseConnection {
       const projectUserIds = Object.keys(storedProject.users)
       // Get users ref
       const usersRef = await this.getCollectionRef(Collections.USERS)
-      let userFetchPromises = []
+      let userFetchPromises: Promise<void>[] = []
       // Loop through project's users' ids
       projectUserIds.forEach(userId => {
-        const userFetchPromise = (usersRef as any)
+        const userFetchPromise = usersRef
           .doc(userId)
           .get()
           .then(userDoc => {
-            let userInfo: UserInfo = userDoc.data()
+            let { uid, name, avatar } = userDoc.data()
+            let userInfo: UserInfo = {
+              uid,
+              name,
+              avatar
+            }
             project.users[userInfo.uid] = new User({ ...userInfo })
           })
         userFetchPromises.push(userFetchPromise)
@@ -132,11 +135,17 @@ class FirestoreDatabaseConnection {
         )
         project.transfers.push(transfer)
       })
+      // Sort according to date
+      project.transfers.sort((a, b) => {
+        return a.date < b.date ? 1 : -1
+      })
+
       // All done
-      return project
+      return Promise.resolve(project)
     } catch (error) {
       console.error(error)
       debugger
+      return Promise.reject(error)
     }
   }
 
@@ -147,12 +156,12 @@ class FirestoreDatabaseConnection {
   ): Promise<object> => {
     return new Promise(async (resolve, reject) => {
       try {
-        const transfersRef = await (this.getCollectionRef(
-          Collections.PROJECTS
-        ) as any)
+        const projectsRef = await this.getCollectionRef(Collections.PROJECTS)
+        const transfersRef = await projectsRef
           .doc(projectId)
           .collection(Collections.TRANSFERS)
-        return transfersRef.push(transfer.serialize(userId))
+        const transferDoc = await transfersRef.add(transfer.serialize(userId))
+        return resolve(transferDoc)
       } catch (error) {
         console.error(error)
         return reject(error)

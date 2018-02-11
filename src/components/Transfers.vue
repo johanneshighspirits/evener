@@ -2,7 +2,7 @@
   <section>
     <h4>Transfers</h4>
     <ul class="transfers">
-      <Transfer v-for="(transfer, i) in transfers" :transfer="transfer" :is-last="i === transfers.length - 1" :key="transfer.id"></Transfer>
+      <Transfer v-for="(transfer, i) in transfers" :transfer="transfer" :is-last="i === transfers.length - 1" :key="transfer.id"/>
     </ul>
   </section>
 </template>

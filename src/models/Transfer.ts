@@ -1,7 +1,7 @@
 import { TransferType } from '../types/common'
 import User from './User'
 
-class Transfer {
+export default class Transfer {
   date: Date
   constructor(
     public amount: number,
@@ -50,5 +50,3 @@ class Transfer {
     }
   }
 }
-
-export default Transfer

@@ -1,7 +1,7 @@
 <template>
   <section>
     <h1>Evener</h1>
-    <Project :project="project"></Project>
+    <Project :project="project"/>
   </section>
 </template>
 

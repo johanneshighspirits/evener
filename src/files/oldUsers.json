@@ -1,0 +1,30 @@
+[
+  {
+    "username": "Johannes BorgstrÃ¶m",
+    "email": "johannes@highspirits.se",
+    "uid": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "password": "9bbaa1a06bbf04c0376810103d7dea22",
+    "salt": 2052617274
+  },
+  {
+    "username": "Sofie Forsman",
+    "email": "sofie.forsman@gmail.com",
+    "uid": "98644168a2d37ec3cb76f29d36ac15a2",
+    "password": "4e338a53993315b1a409efd30c57e87b",
+    "salt": 1310667088
+  },
+  {
+    "username": "HotmailJohannes",
+    "email": "johannes.borgstrom@hotmail.com",
+    "uid": "f49a7bc3da3669e1c9184b18229aaa27",
+    "password": "80895ee495c86d0c014b45ef5bd6df1f",
+    "salt": 1813645715
+  },
+  {
+    "username": "Test User",
+    "email": "johannes.borgstrom81@gmail.com",
+    "uid": "539457253335a6fb6c628dd32cc7fa26",
+    "password": "6a07ea1fc929139aea664708636dbe99",
+    "salt": 53229842
+  }
+]
