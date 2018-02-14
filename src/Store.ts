@@ -12,16 +12,31 @@ export interface State {
   user?: User
   projects: { [key: string]: Project }
   projectId: string
+  inviteLink: string
+  inviteTimedOut: boolean
+  displayInviteHelp: boolean
+  inviteStatus: number
+  showLoginForm: boolean
+  inviteIsValid: boolean
 }
 
 const state: State = {
   user: undefined,
   projects: {},
-  projectId: ''
+  projectId: '',
+  inviteTimedOut: false,
+  displayInviteHelp: false,
+  inviteLink: '',
+  inviteStatus: 0,
+  showLoginForm: false,
+  inviteIsValid: false
 }
 
 const mutations: MutationTree<State> = {
   /* Authorization */
+  [Mutations.SHOW_LOGIN_FORM]: state => {
+    state.showLoginForm = true
+  },
   [Mutations.LOGGED_IN]: (state, user: User) => {
     state.user = user
   },
@@ -39,6 +54,21 @@ const mutations: MutationTree<State> = {
   /* Notifications */
   [Mutations.DISPLAY_NOTIFICATION]: (state, message) => {
     console.log('[NOTIFICATION]', message)
+  },
+  /* Invitations */
+  [Mutations.GENERATE_INVITE_LINK]: (state, inviteLink) => {
+    state.inviteLink = inviteLink
+    state.inviteStatus += 1
+  },
+  [Mutations.INCREMENT_INVITE_STATUS]: state => {
+    state.inviteStatus += 1
+  },
+  [Mutations.DISPLAY_INVITE_HELP]: (state, displayInviteHelp) => {
+    state.displayInviteHelp = displayInviteHelp
+    state.inviteStatus += 1
+  },
+  [Mutations.INVITE_IS_VALID]: (state, isValid) => {
+    state.inviteIsValid = isValid
   }
 }
 
@@ -58,8 +88,9 @@ const actions: ActionTree<State, any> = {
       if (state.user === undefined) throw new Error('No user')
       let projects: object = await db.getProjects(state.user.uid)
       commit(Mutations.LOAD_PROJECTS, projects)
-      console.log('Projects loaded, open project')
+      console.log('Projects loaded', projects)
       let projectId = 'yGuXxTD9cdueFvHHOisB'
+      console.log('Open project (HARD CODED):', projectId)
       dispatch(Actions.OPEN_PROJECT, projectId)
     } catch (error) {
       debugger
@@ -104,6 +135,61 @@ const actions: ActionTree<State, any> = {
         'Transfer added: -',
         transfer.message
       )
+    } catch (error) {
+      commit(Mutations.DISPLAY_NOTIFICATION, error)
+      debugger
+    }
+  },
+  /* Collaboration */
+  /**
+   * Register an invitation at firestore /invitations/{inviteId}
+   * Generate an invite link
+   * Display notification
+   */
+  [Actions.INVITE_COLLABORATOR]: async ({ state, commit }, email) => {
+    try {
+      const inviteId = await db.inviteCollaborator(
+        email,
+        state.user!,
+        state.projects[state.projectId]
+      )
+      commit(
+        Mutations.GENERATE_INVITE_LINK,
+        `${window.location.origin}/invitations/${inviteId}`
+      )
+      commit(
+        Mutations.DISPLAY_NOTIFICATION,
+        `${email} invited to ${state.projects[state.projectId].title}. ${
+          window.location.origin
+        }/invitations/${inviteId}`
+      )
+    } catch (error) {
+      commit(Mutations.DISPLAY_NOTIFICATION, error)
+      debugger
+    }
+  },
+  /**
+   * An unauthed user has clicked an invite link, open invitation
+   * and validate user
+   */
+  [Actions.OPEN_INVITE]: async ({ state, commit }, inviteId) => {
+    try {
+      const invite = await db.openInvite(inviteId)
+      commit(Mutations.SHOW_LOGIN_FORM)
+      commit(
+        Mutations.DISPLAY_NOTIFICATION,
+        `${invite.invited} opened invite to ${invite.projectName}.`
+      )
+    } catch (error) {
+      commit(Mutations.DISPLAY_NOTIFICATION, error)
+      debugger
+    }
+  },
+  [Actions.VALIDATE_PROJECT_INVITE]: async ({ state, commit }, inviteId) => {
+    try {
+      const isValid = await db.validateInvite(inviteId)
+      commit(Mutations.DISPLAY_NOTIFICATION, `Invite isValid: ${isValid}`)
+      commit(Mutations.INVITE_IS_VALID, isValid)
     } catch (error) {
       commit(Mutations.DISPLAY_NOTIFICATION, error)
       debugger

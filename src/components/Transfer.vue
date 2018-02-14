@@ -35,13 +35,13 @@ export default Vue.extend({
       const { transferType, paidBy, receiver } = this.transfer
       let receiverOrPayer: User = paidBy
       if (transferType === TransferType.income) receiverOrPayer = receiver
-      return receiverOrPayer.initials()
+      return receiverOrPayer !== undefined ? receiverOrPayer.initials() : '--'
     },
     avatar: function() {
       const { transferType, paidBy, receiver } = this.transfer
       let receiverOrPayer: User = paidBy
       if (transferType === TransferType.income) receiverOrPayer = receiver
-      return receiverOrPayer.avatar
+      return receiverOrPayer !== undefined ? receiverOrPayer.avatar : ''
     }
   }
 })

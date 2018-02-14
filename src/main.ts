@@ -21,25 +21,35 @@ new Vue({
   template: '<App/>',
   created() {
     firebase.initializeApp(config)
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        user.getIdToken().then(token => {
-          console.log('accessToken received...')
-        })
-        let userInfo = {
-          uid: user.uid,
-          name: user.displayName,
-          avatar: user.photoURL
-        }
-        console.log(user)
-        store.dispatch(Actions.GET_USER, userInfo)
-        console.log('Logged in')
-        this.$router.push('/')
-      } else {
-        store.commit(Mutations.LOGGED_OUT)
-        console.log('Logged out')
-        this.$router.push('/login')
-      }
-    })
+    // firebase
+    //   .auth()
+    //   .signOut()
+    //   .then(
+    //     function() {
+    //       console.log('Signed Out')
+    //     },
+    //     function(error) {
+    //       console.error('Sign Out Error', error)
+    //     }
+    //   )
+    // firebase.auth().onAuthStateChanged(user => {
+    //   if (user) {
+    //     user.getIdToken().then(token => {
+    //       console.log('accessToken received...')
+    //     })
+    //     let userInfo = {
+    //       uid: user.uid,
+    //       name: user.displayName,
+    //       avatar: user.photoURL
+    //     }
+    //     store.dispatch(Actions.GET_USER, userInfo)
+    //     console.log('Logged in')
+    //     this.$router.push('/')
+    //   } else {
+    //     store.commit(Mutations.LOGGED_OUT)
+    //     console.log('Logged out')
+    //     this.$router.push('/login')
+    //   }
+    // })
   }
 })

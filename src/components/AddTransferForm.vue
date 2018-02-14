@@ -1,5 +1,6 @@
 <template>
   <form @submit.prevent="addTransfer" class="add-transfer-form">
+    <h2>Add transfers</h2>
     <div class="form-group import-transfers">
       <label for="file" class="button bordered">
         Import JSON from file
@@ -174,12 +175,14 @@ export default class AddTransferForm extends Vue {
       ee5d03ed927d683ff79fa00bd2a937bd: new User({
         name: 'Johannes Borgström',
         uid: '9nDrJ2WuYyVB7HEuP9MsLkhIBz23',
-        avatar: ''
+        avatar: '',
+        email: 'johannes@highspirits.se'
       }),
       '98644168a2d37ec3cb76f29d36ac15a2': new User({
         name: 'Sofie Forsman',
         uid: '',
-        avatar: ''
+        avatar: '',
+        email: 'sofie.forsman@gmail.com'
       })
     }
 

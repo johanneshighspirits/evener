@@ -14,6 +14,7 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'login',
+  props: ['successUrl'],
   data() {
     return {
       status: 'Connecting to Google...'
@@ -28,7 +29,7 @@ export default Vue.extend({
     let ui = new firebaseui.auth.AuthUI(firebase.auth())
     firebase.auth().useDeviceLanguage()
     ui.start('#firebaseui-auth-container', {
-      signInSuccessUrl: '/',
+      signInSuccessUrl: this.successUrl || '/',
       signInOptions: [
         // List of OAuth providers supported.
         firebase.auth.GoogleAuthProvider.PROVIDER_ID

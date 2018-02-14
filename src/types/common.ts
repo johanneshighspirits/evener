@@ -22,6 +22,7 @@ export interface UserInfo {
   uid: string
   name: string
   avatar: string
+  email: string
 }
 
 export interface Project {
@@ -29,4 +30,11 @@ export interface Project {
   title: string
   transfers: Transfer[]
   users: { [key: string]: User }
+}
+
+export interface Invitation {
+  invited: string
+  inviter: string
+  projectId: string
+  projectName: string
 }
