@@ -11,6 +11,7 @@ Vue.use(Vuex)
 export interface State {
   user?: User
   projects: { [key: string]: Project }
+  noUserProjects: boolean
   projectId: string
   inviteLink: string
   inviteTimedOut: boolean
@@ -23,6 +24,7 @@ export interface State {
 const state: State = {
   user: undefined,
   projects: {},
+  noUserProjects: false,
   projectId: '',
   inviteTimedOut: false,
   displayInviteHelp: false,
@@ -45,8 +47,12 @@ const mutations: MutationTree<State> = {
     state.projects = {}
     state.projectId = ''
   },
+  /* Project handling */
   [Mutations.LOAD_PROJECTS]: (state, projects) => {
     state.projects = projects
+  },
+  [Mutations.NO_PROJECTS_FOUND]: state => {
+    state.noUserProjects = true
   },
   [Mutations.UPDATE_PROJECT_ID]: (state, projectId) => {
     state.projectId = projectId
@@ -87,32 +93,23 @@ const actions: ActionTree<State, any> = {
     try {
       if (state.user === undefined) throw new Error('No user')
       let projects: object = await db.getProjects(state.user.uid)
+      console.warn('[TODO]: Check if any projects exists in Store.Actions.GET_USER_PROJECTS.')
       commit(Mutations.LOAD_PROJECTS, projects)
       console.log('Projects loaded', projects)
-      let projectId = 'yGuXxTD9cdueFvHHOisB'
-      console.log('Open project (HARD CODED):', projectId)
+      let projectId = state.user.currentProject || (await db.getUsersLastProjectId(state.user))
+      // let projectId = 'yGuXxTD9cdueFvHHOisB'
+      if (!projectId) {
+        console.log(
+          '[TODO:] Found no current project, select the first or show list of all users projects?'
+        )
+        projectId = Object.keys(projects)[0]
+      }
+      console.log('Opening project with id:', projectId)
       dispatch(Actions.OPEN_PROJECT, projectId)
     } catch (error) {
+      commit(Mutations.NO_PROJECTS_FOUND)
       debugger
     }
-    // if (Object.keys(projects).length > 0) {
-    //   let setListId = await db.getUsersLastSetListId(state.user.uid)
-    //   if (!setListId) {
-    //     setListId = Object.keys(projects)[0]
-    //     if (setListId) {
-    //       if (projects[setListId]) {
-    //         db.persistCurrentSetListId(state.user.uid, setListId)
-    //       } else {
-    //         db.deleteCurrentSetListId(state.user.uid)
-    //       }
-    //     }
-    //   }
-    //   commit('loadSetLists', projects)
-    //   commit('updateSetListId', setListId)
-    //   db.watchSetList(setListId)
-    // } else {
-    //   console.warn('No projects found')
-    // }
   },
   [Actions.OPEN_PROJECT]: async ({ state, commit }, projectId) => {
     try {
@@ -120,6 +117,10 @@ const actions: ActionTree<State, any> = {
       if (project.transfers.length === 0) {
         // Load transfers and users
         await db.populateProject(project)
+      }
+      // Make sure currentProjectId is updated
+      if (state.user && state.user.currentProject !== projectId) {
+        db.storeUsersLastSetListId(state.user, projectId)
       }
       commit(Mutations.UPDATE_PROJECT_ID, projectId)
     } catch (error) {
@@ -130,11 +131,7 @@ const actions: ActionTree<State, any> = {
     try {
       if (state.user === undefined) throw new Error('No User')
       await db.addTransfer(transfer, state.projectId, state.user.uid)
-      commit(
-        Mutations.DISPLAY_NOTIFICATION,
-        'Transfer added: -',
-        transfer.message
-      )
+      commit(Mutations.DISPLAY_NOTIFICATION, 'Transfer added: -', transfer.message)
     } catch (error) {
       commit(Mutations.DISPLAY_NOTIFICATION, error)
       debugger
@@ -153,10 +150,7 @@ const actions: ActionTree<State, any> = {
         state.user!,
         state.projects[state.projectId]
       )
-      commit(
-        Mutations.GENERATE_INVITE_LINK,
-        `${window.location.origin}/invitations/${inviteId}`
-      )
+      commit(Mutations.GENERATE_INVITE_LINK, `${window.location.origin}/invitations/${inviteId}`)
       commit(
         Mutations.DISPLAY_NOTIFICATION,
         `${email} invited to ${state.projects[state.projectId].title}. ${
@@ -189,6 +183,7 @@ const actions: ActionTree<State, any> = {
     try {
       const isValid = await db.validateInvite(inviteId)
       commit(Mutations.DISPLAY_NOTIFICATION, `Invite isValid: ${isValid}`)
+      // Redirect to project (happens in Validate.vue when isValid switches to true)
       commit(Mutations.INVITE_IS_VALID, isValid)
     } catch (error) {
       commit(Mutations.DISPLAY_NOTIFICATION, error)

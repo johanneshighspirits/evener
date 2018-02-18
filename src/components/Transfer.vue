@@ -31,15 +31,15 @@ export default Vue.extend({
     }
   },
   computed: {
-    initials: function() {
+    initials: function(): string {
       const { transferType, paidBy, receiver } = this.transfer
-      let receiverOrPayer: User = paidBy
+      let receiverOrPayer: User | undefined = paidBy
       if (transferType === TransferType.income) receiverOrPayer = receiver
       return receiverOrPayer !== undefined ? receiverOrPayer.initials() : '--'
     },
-    avatar: function() {
+    avatar: function(): string {
       const { transferType, paidBy, receiver } = this.transfer
-      let receiverOrPayer: User = paidBy
+      let receiverOrPayer: User | undefined = paidBy
       if (transferType === TransferType.income) receiverOrPayer = receiver
       return receiverOrPayer !== undefined ? receiverOrPayer.avatar : ''
     }

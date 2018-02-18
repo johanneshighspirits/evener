@@ -4,15 +4,24 @@
       <h3>{{ project.title }}</h3>
       <invite-collaborator-form/>
       <add-transfer-form/>
+      <calculator :transfers="project.transfers" :users="project.users"/>
       <transfers :transfers="project.transfers"/>
     </section>
-    <p v-else>Loading project...</p>
+    <section v-else>
+      <div v-if="noUserProjects">
+        <p>No projects found. [Create new form here...]</p>
+      </div>
+      <div v-else>
+        <p>Loading project...</p>
+      </div>
+    </section>
   </transition>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Transfers from './Transfers.vue'
+import Calculator from './Calculator.vue'
 import AddTransferForm from './AddTransferForm.vue'
 import InviteCollaboratorForm from './InviteCollaboratorForm.vue'
 export default Vue.extend({
@@ -20,8 +29,14 @@ export default Vue.extend({
   props: ['project'],
   components: {
     Transfers,
+    Calculator,
     AddTransferForm,
     InviteCollaboratorForm
+  },
+  computed: {
+    noUserProjects(): boolean {
+      return this.$store.state.noUserProjects
+    }
   }
 })
 </script>

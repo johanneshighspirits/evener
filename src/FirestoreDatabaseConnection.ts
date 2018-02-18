@@ -7,13 +7,13 @@ import { Collections } from './constants'
 import { Store } from 'vuex'
 import { State } from './Store'
 
-interface FirestoreDatabaseConnection {
-  // Store a reference to vuex store
-  store: Store<State>
-  getOrCreateUser: (userInfo: UserInfo) => Promise<any>
-  // unsubscribeSetListWatch: () => {}
-  // unsubscribeSongsWatch: () => {}
-}
+// interface FirestoreDatabaseConnection {
+//   // Store a reference to vuex store
+//   store: Store<State>
+//   getOrCreateUser: (userInfo: UserInfo) => Promise<any>
+//   // unsubscribeSetListWatch: () => {}
+//   // unsubscribeSongsWatch: () => {}
+// }
 
 class FirestoreDatabaseConnection {
   constructor(public store: Store<State>) {
@@ -50,15 +50,11 @@ class FirestoreDatabaseConnection {
     return firebase.firestore().collection(collection)
   }
 
-  getProjects = async (
-    uid: string
-  ): Promise<{ [key: string]: Project } | object> => {
+  getProjects = (uid: string): Promise<{ [key: string]: Project }> => {
     return new Promise(async (resolve, reject) => {
       try {
         const projectsRef = await this.getCollectionRef(Collections.PROJECTS)
-        const userProjects = await projectsRef
-          .where(`users.${uid}`, '==', true)
-          .get()
+        const userProjects = await projectsRef.where(`users.${uid}`, '==', true).get()
         let projects: { [key: string]: Project } = {}
         userProjects.forEach(projectSnapshot => {
           let { title, users } = projectSnapshot.data()
@@ -68,14 +64,42 @@ class FirestoreDatabaseConnection {
             transfers: [],
             users
           }
-          projects[projectSnapshot.id] = project
+          projects[`${projectSnapshot.id}`] = project
         })
         return resolve(projects)
       } catch (error) {
         console.log(error)
+        console.log('Found no projects')
         debugger
-        return reject({ message: 'Found no projects' })
+        return reject()
       }
+    })
+  }
+
+  getUsersLastProjectId = (user: User): Promise<string> => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // Get users ref
+        const usersRef = await this.getCollectionRef(Collections.USERS)
+        const userDoc = await usersRef.doc(user.uid).get()
+        const storedUser = userDoc.data()
+        let currentProject = storedUser.currentProject
+        return resolve(currentProject)
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
+  storeUsersLastSetListId = (user: User, projectId: string): void => {
+    // Get users ref
+    this.getCollectionRef(Collections.USERS).then(usersRef => {
+      return usersRef.doc(user.uid).set(
+        {
+          currentProject: projectId
+        },
+        { merge: true }
+      )
     })
   }
 
@@ -97,12 +121,13 @@ class FirestoreDatabaseConnection {
           .doc(userId)
           .get()
           .then(userDoc => {
-            let { uid, name, avatar, email } = userDoc.data()
+            let { uid, name, avatar, email, currentProject } = userDoc.data()
             let userInfo: UserInfo = {
               uid,
               name,
               avatar,
-              email
+              email,
+              currentProject
             }
             project.users[userInfo.uid] = new User({ ...userInfo })
           })
@@ -110,32 +135,16 @@ class FirestoreDatabaseConnection {
       })
       await Promise.all(userFetchPromises)
       // Project is now populated with users, load transfers
-      const transfersCollection = await storedProjectRef
-        .collection(Collections.TRANSFERS)
-        .get()
+      const transfersCollection = await storedProjectRef.collection(Collections.TRANSFERS).get()
       // Init transfers array
       project.transfers = []
       transfersCollection.forEach(transferDoc => {
         let transferData = transferDoc.data()
         // console.log(transferData)
-        let {
-          amount,
-          date,
-          transferType,
-          message,
-          paidBy,
-          receiver
-        } = transferData
+        let { amount, date, transferType, message, paidBy, receiver } = transferData
         let paidByUser = project.users[paidBy]
         let receiverUser = project.users[receiver]
-        let transfer = new Transfer(
-          amount,
-          date,
-          transferType,
-          message,
-          paidByUser,
-          receiverUser
-        )
+        let transfer = new Transfer(amount, date, transferType, message, paidByUser, receiverUser)
         project.transfers.push(transfer)
       })
       // Sort according to date
@@ -152,18 +161,39 @@ class FirestoreDatabaseConnection {
     }
   }
 
-  addTransfer = (
-    transfer: Transfer,
-    projectId: string,
-    userId: string
-  ): Promise<object> => {
+  addTransfer = (transfer: Transfer, projectId: string, userId: string): Promise<object> => {
     return new Promise(async (resolve, reject) => {
       try {
         const projectsRef = await this.getCollectionRef(Collections.PROJECTS)
-        const transfersRef = await projectsRef
-          .doc(projectId)
-          .collection(Collections.TRANSFERS)
-        const transferDoc = await transfersRef.add(transfer.serialize(userId))
+        const transfersRef = await projectsRef.doc(projectId).collection(Collections.TRANSFERS)
+        // Check if transfer already exists
+        let transferExists = false
+        const serializedTransfer = transfer.serialize(userId)
+        const transferDocs = await transfersRef
+          .where('amount', '==', serializedTransfer.amount)
+          .where('paidBy', '==', serializedTransfer.paidBy)
+          .where('receiver', '==', serializedTransfer.receiver)
+          .where('message', '==', serializedTransfer.message)
+          .get()
+        if (transferDocs) {
+          transferDocs.forEach(doc => {
+            let storedTransfer = doc.data()
+            const storedDate = new Date(storedTransfer.date)
+            if (
+              storedDate.getFullYear() === transfer.date.getFullYear() &&
+              storedDate.getMonth() === transfer.date.getMonth() &&
+              storedDate.getDate() === transfer.date.getDate()
+            ) {
+              transferExists = true
+            }
+          })
+          // Found no matches, proceed
+        }
+        if (transferExists) {
+          console.log('Transfer already exists')
+          throw new Error('Transfer already exists')
+        }
+        const transferDoc = await transfersRef.add(serializedTransfer)
         return resolve(transferDoc)
       } catch (error) {
         console.error(error)
@@ -185,11 +215,35 @@ class FirestoreDatabaseConnection {
           projectId: project.id,
           projectName: project.title
         }
-        const invitationsRef = await this.getCollectionRef(
-          Collections.INVITATIONS
+        const invitationsRef = await this.getCollectionRef(Collections.INVITATIONS)
+        // Check if invitation exists
+        const existingInvitations = await invitationsRef
+          .where('invited', '==', email)
+          .where('projectId', '==', project.id)
+          .limit(1)
+          .get()
+        if (!existingInvitations.empty) {
+          // Return existing invitation id
+          console.log('Found existing invitation', existingInvitations.docs[0])
+          debugger
+          return resolve(existingInvitations.docs[0].id)
+        }
+        // Create new invitation
+        const invitationResult = await invitationsRef.add(invitation)
+        console.log('Created new invitation', invitationResult)
+        // Register invitation id on project
+        const projectsRef = await this.getCollectionRef(Collections.PROJECTS)
+        const projectInvitationResult = await projectsRef.doc(project.id).set(
+          {
+            invitedUsers: {
+              [`${email}`]: true
+            }
+          },
+          {
+            merge: true
+          }
         )
-        const result = await invitationsRef.add(invitation)
-        return resolve(result.id)
+        return resolve(invitationResult.id)
       } catch (error) {
         console.error(error)
         return reject(error)
@@ -200,9 +254,7 @@ class FirestoreDatabaseConnection {
   openInvite = (inviteId: string): Promise<Invitation> => {
     return new Promise(async (resolve, reject) => {
       try {
-        const invitationsRef = await this.getCollectionRef(
-          Collections.INVITATIONS
-        )
+        const invitationsRef = await this.getCollectionRef(Collections.INVITATIONS)
         const invitationDoc = await invitationsRef.doc(inviteId).get()
         const invitation = invitationDoc.data() as Invitation
         return resolve(invitation)
@@ -216,23 +268,23 @@ class FirestoreDatabaseConnection {
   validateInvite = (inviteId: string): Promise<boolean> => {
     return new Promise(async (resolve, reject) => {
       try {
-        const invitationsRef = await this.getCollectionRef(
-          Collections.INVITATIONS
-        )
+        const invitationsRef = await this.getCollectionRef(Collections.INVITATIONS)
         const invitationDoc = await invitationsRef.doc(inviteId).get()
         const invitation = invitationDoc.data() as Invitation
         let user = firebase.auth().currentUser
         if (!user) {
-          console.error('Can not validate invite if user is not logged in')
+          throw new Error('Can not validate invite if user is not logged in')
         } else {
           if (user.email === invitation.invited) {
             // User is valid, add user uid to project.users
-            const accepted = await this.acceptInvite(invitation, user.uid)
+            const accepted = await this.acceptInvite(invitation, inviteId, user.uid)
             if (!accepted)
               throw new Error(
                 'User is valid but something went wrong when trying to unlock project.'
               )
             return resolve(true)
+          } else {
+            console.log("User's email doesn't match the invitation")
           }
         }
         return resolve(false)
@@ -243,20 +295,27 @@ class FirestoreDatabaseConnection {
     })
   }
 
-  acceptInvite = (invitation: Invitation, uid: string): Promise<boolean> => {
+  acceptInvite = (invitation: Invitation, inviteId: string, uid: string): Promise<boolean> => {
     return new Promise(async (resolve, reject) => {
       try {
         const projectsRef = await this.getCollectionRef(Collections.PROJECTS)
-        const result = await projectsRef.doc(invitation.projectId).set(
+        // Remove invited email from project.invitedUsers and
+        // add user uid to project.users
+        await projectsRef.doc(invitation.projectId).set(
           {
-            [`users.${uid}`]: true
+            invitedUsers: {
+              [`${invitation.invited}`]: firebase.firestore.FieldValue.delete()
+            },
+            users: {
+              [`${uid}`]: true
+            }
           },
           { merge: true }
         )
-        if (!result) {
-          debugger
-          throw new Error('error in db.acceptInvite()')
-        }
+        // Remove invitation
+        const invitationsRef = await this.getCollectionRef(Collections.INVITATIONS)
+        await invitationsRef.doc(inviteId).delete()
+        // Success
         return resolve(true)
       } catch (error) {
         console.error(error)

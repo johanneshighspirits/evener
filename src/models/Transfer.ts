@@ -3,15 +3,19 @@ import User from './User'
 
 export default class Transfer {
   date: Date
+  paidBy: User | undefined
+  receiver: User | undefined
   constructor(
     public amount: number,
     date: string,
     public transferType: TransferType,
     public message: string,
-    public paidBy: User,
-    public receiver: User
+    paidBy: User | undefined,
+    receiver: User | undefined
   ) {
     this.date = new Date(date)
+    if (paidBy) this.paidBy = paidBy
+    if (receiver) this.receiver = receiver
   }
 
   shortDate = () => {

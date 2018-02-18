@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="addTransfer" class="add-transfer-form">
+  <form @submit.prevent="addTransfer" class="add-transfer-form form">
     <h2>Add transfers</h2>
     <div class="form-group import-transfers">
       <label for="file" class="button bordered">
@@ -19,7 +19,7 @@
     </div>
     <transition name="fade-in-up">
       <div v-if="transferType !== -1" class="form-group">
-        <input type="number" class="bordered" v-model.number="amount" ref="amount" placeholder="Amount">
+        <input type="number" class="bordered" min="0" step=".01" v-model.number="amount" ref="amount" placeholder="Amount">
       </div>
     </transition>
     <transition name="fade-in-up">
@@ -121,11 +121,19 @@ export default class AddTransferForm extends Vue {
     if (!this.validateForm()) return null
 
     const date = new Date().toISOString()
-    const paidBy = this.$store.getters.user
-    let receiver =
-      this.$data.transferType === 2
-        ? this.$store.getters.users[this.$data.receiver]
-        : ''
+    let paidBy: User | undefined = undefined
+    let receiver: User | undefined = undefined
+    switch (this.$data.transferType) {
+      case TransferType.income:
+        receiver = this.$store.getters.user
+        break
+      case TransferType.payment:
+        paidBy = this.$store.getters.user
+        break
+      case TransferType.repayment:
+        paidBy = this.$store.getters.user
+        receiver = this.$store.getters.users[this.$data.receiver]
+    }
     const transfer = new Transfer(
       this.$data.amount,
       date,
@@ -156,68 +164,40 @@ export default class AddTransferForm extends Vue {
     }
   }
   importTransfers(legacyTransfers: LegacyTransfer[]) {
-    // let importedTransfers = [
-    //   {
-    //     message: 'Bärsele',
-    //     amount: 200,
-    //     date: '2017-02-19',
-    //     paidBy: 'ee5d03ed927d683ff79fa00bd2a937bd',
-    //     receiver: '',
-    //     eventType: 1,
-    //     userID: 'ee5d03ed927d683ff79fa00bd2a937bd',
-    //     project: '7b05f090cfd49b3c1d1270eeb6ad0407'
+    // const users = this.$store.getters.users
+    // legacyTransfers.forEach(importedTransfer => {
+    //   let eventType = importedTransfer.eventType
+    //   if (importedTransfer.project !== '7b05f090cfd49b3c1d1270eeb6ad0407') {
+    //     console.warn('Ignore other project:', importedTransfer.project)
+    //     return false
     //   }
-    // ]
-
-    const users = this.$store.getters.users
-    // MOCKUP:
-    const oldUserIds: { [key: string]: User } = {
-      ee5d03ed927d683ff79fa00bd2a937bd: new User({
-        name: 'Johannes Borgström',
-        uid: '9nDrJ2WuYyVB7HEuP9MsLkhIBz23',
-        avatar: '',
-        email: 'johannes@highspirits.se'
-      }),
-      '98644168a2d37ec3cb76f29d36ac15a2': new User({
-        name: 'Sofie Forsman',
-        uid: '',
-        avatar: '',
-        email: 'sofie.forsman@gmail.com'
-      })
-    }
-
-    legacyTransfers.forEach(importedTransfer => {
-      if (importedTransfer.project !== '7b05f090cfd49b3c1d1270eeb6ad0407') {
-        console.warn('Ignore other project:', importedTransfer.project)
-        return false
-      }
-      let paidBy = oldUserIds[importedTransfer.paidBy]
-      if (paidBy === undefined) {
-        console.warn("Couldn't find User with id", importedTransfer.paidBy)
-        return false
-      }
-      let receiver = oldUserIds[importedTransfer.receiver]
-      if (
-        importedTransfer.eventType === TransferType.repayment &&
-        receiver === undefined
-      ) {
-        console.warn(
-          'No receiver found for repayment transfer',
-          importedTransfer
-        )
-        return false
-      }
-
-      const transfer = new Transfer(
-        importedTransfer.amount,
-        new Date(importedTransfer.date).toISOString(),
-        importedTransfer.eventType,
-        importedTransfer.message,
-        paidBy,
-        receiver
-      )
-      this.$store.dispatch(Actions.ADD_TRANSFER, transfer)
-    })
+    //   if (
+    //     importedTransfer.eventType === TransferType.payment &&
+    //     importedTransfer.paidBy !== '' &&
+    //     importedTransfer.receiver !== ''
+    //   ) {
+    //     eventType = TransferType.repayment
+    //   }
+    //   let paidBy = oldUserIds[importedTransfer.paidBy]
+    //   if (paidBy === undefined && importedTransfer.eventType !== TransferType.income) {
+    //     console.warn("Couldn't find User for transfer", importedTransfer)
+    //     return false
+    //   }
+    //   let receiver = oldUserIds[importedTransfer.receiver]
+    //   if (importedTransfer.eventType === TransferType.repayment && receiver === undefined) {
+    //     console.warn('No receiver found for repayment transfer', importedTransfer)
+    //     return false
+    //   }
+    //   const transfer = new Transfer(
+    //     importedTransfer.amount,
+    //     new Date(importedTransfer.date).toISOString(),
+    //     eventType,
+    //     importedTransfer.message,
+    //     paidBy,
+    //     receiver
+    //   )
+    //   this.$store.dispatch(Actions.ADD_TRANSFER, transfer)
+    // })
   }
 }
 </script>
@@ -231,8 +211,10 @@ export default class AddTransferForm extends Vue {
   }
   input[type='radio'],
   input[type='file'] {
+    display: block;
     position: absolute;
     visibility: hidden;
+    width: 0;
   }
   select {
     width: 50%;
@@ -288,7 +270,7 @@ export default class AddTransferForm extends Vue {
   .select-transfer-type {
     display: block;
     label {
-      margin: 2px 4px;
+      margin: 2px auto;
     }
     @media screen and (min-width: 400px) {
       display: flex;
@@ -298,42 +280,6 @@ export default class AddTransferForm extends Vue {
         margin: auto 2px;
       }
     }
-  }
-  ::-webkit-input-placeholder {
-    /* Chrome/Opera/Safari */
-    color: $gold;
-  }
-  ::-moz-placeholder {
-    /* Firefox 19+ */
-    color: $gold;
-  }
-  :-ms-input-placeholder {
-    /* IE 10+ */
-    color: $gold;
-  }
-  :-moz-placeholder {
-    /* Firefox 18- */
-    color: $gold;
-  }
-}
-.fade-in-up {
-  &-enter {
-    opacity: 0;
-    transform: translateY(2em);
-  }
-  &-enter-to {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-  &-enter-active,
-  &-leave-active {
-    transition: all 0.5s ease-in-out;
-  }
-  &-leave {
-    opacity: 1;
-  }
-  &-leave-to {
-    opacity: 0;
   }
 }
 </style>

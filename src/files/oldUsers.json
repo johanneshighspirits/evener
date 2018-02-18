@@ -1,4 +1,23 @@
-[
+    // MOCKUP:
+    const oldUserIds: { [key: string]: User } = {
+      ee5d03ed927d683ff79fa00bd2a937bd: new User({
+        name: 'Johannes Borgström',
+        uid: '9nDrJ2WuYyVB7HEuP9MsLkhIBz23',
+        avatar: '',
+        email: 'johannes@highspirits.se',
+        currentProject: ''
+      }),
+      '98644168a2d37ec3cb76f29d36ac15a2': new User({
+        name: 'Sofie Forsman',
+        uid: 'R9TWl0TF7NaTo76hAJQ62vorfwA2',
+        avatar: '',
+        email: 'sofie.forsman@gmail.com',
+        currentProject: ''
+      })
+    }
+    
+    
+    [
   {
     "username": "Johannes BorgstrÃ¶m",
     "email": "johannes@highspirits.se",

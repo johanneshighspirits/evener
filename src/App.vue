@@ -86,9 +86,17 @@ body {
   input {
     font-size: 1em;
     text-align: center;
+    background-color: #fff;
+    appearance: none;
   }
   .form-group {
     margin: 4px auto;
+    padding-left: 4px;
+    padding-right: 4px;
+    @media screen and (min-width: 400px) {
+      padding-left: 0;
+      padding-right: 0;
+    }
     width: 100%;
     max-width: 400px;
     & > * {
