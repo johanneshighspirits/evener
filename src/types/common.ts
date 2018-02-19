@@ -7,15 +7,14 @@ export enum TransferType {
   repayment
 }
 
-export interface LegacyTransfer {
-  message: string
-  amount: number
+export interface JSONTransfer {
   date: string
   paidBy: string
   receiver: string
-  eventType: number
-  userID: string
-  project: string
+  amount: number
+  message: string
+  transferType: number
+  uid: string
 }
 
 export interface UserInfo {

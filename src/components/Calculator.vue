@@ -2,10 +2,10 @@
   <section>
     <h4>Balance</h4>
     <ul class="debt-boxes-container">
-      <div v-for="(balance, i) in balances" :key="i">
+      <div v-for="(balance, i) in balances" class="debt-box" :key="i">
         <h5>{{ balance.name }}</h5>
         <div class="debt-result" :class="{ green: balance.balance >= 0, red: balance.balance < 0 }">
-          <p><b>Balance: </b>{{ balance.balance.toFixed(2) }}</p>
+          <p>{{ balance.balance.toFixed(2) }}</p>
         </div>
       </div>
     </ul>
@@ -35,7 +35,7 @@ export default class Calculator extends Vue {
      * Map transfers to users
      */
     let balances: { [key: string]: { balance: number; name: string } } = {}
-    if (this.$props.transfers) {
+    if (this.$props.transfers && this.$props.transfers.length > 0) {
       let transfers = Object.values(this.$props.transfers) as Transfer[]
       // var to hold all users while we calculate their balances
       // Actual count of users (2 == 2 users)
@@ -103,18 +103,35 @@ $green: rgb(122, 206, 122);
 $red: rgb(223, 121, 121);
 
 .debt-boxes-container {
-  margin: 4px;
+  display: block;
+  @media screen and (min-width: 400px) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  margin: 2px;
   padding: 0;
-  .debt-result {
-    padding: 1em;
-  }
-  .green {
-    background: $green;
-    box-shadow: 0 0 0 2px #fff inset, 0 0 0 2px $green;
-  }
-  .red {
-    background: $red;
-    box-shadow: 0 0 0 2px #fff inset, 0 0 0 2px $red;
+  .debt-box {
+    flex-grow: 1;
+    margin: 1px;
+    .debt-result {
+      color: #fff;
+      font-size: 1.5em;
+      padding: 0;
+      @media screen and (min-width: 400px) {
+        font-size: 2em;
+        padding: 0.2em;
+      }
+    }
+    .green {
+      background: $green;
+      border: solid 3px $green;
+      box-shadow: 0 0 0 2px #fff inset;
+    }
+    .red {
+      background: $red;
+      border: solid 3px $red;
+      box-shadow: 0 0 0 2px #fff inset;
+    }
   }
 }
 </style>

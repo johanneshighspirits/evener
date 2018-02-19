@@ -1,7 +1,7 @@
 <template>
   <transition name="fade-in-up" appear>
     <section v-if="project">
-      <h3>{{ project.title }}</h3>
+      <h2>{{ project.title }}</h2>
       <invite-collaborator-form/>
       <add-transfer-form/>
       <calculator :transfers="project.transfers" :users="project.users"/>

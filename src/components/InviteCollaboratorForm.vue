@@ -26,7 +26,7 @@ import Vue from 'vue'
 import { Component, Watch } from 'vue-property-decorator'
 import { Actions, Mutations } from '../constants'
 import Transfer from '../models/Transfer'
-import { TransferType, LegacyTransfer } from '../types/common'
+import { TransferType, JSONTransfer } from '../types/common'
 import User from '../models/User'
 
 interface HTMLInputEvent extends Event {
@@ -66,19 +66,16 @@ export default class InviteCollaboratorForm extends Vue {
     return this.$store.state.inviteLink
   }
   get emailLink() {
-    const subject =
-      'You have been invited to ' + this.$store.getters.project.title
+    const subject = 'You have been invited to ' + this.$store.getters.project.title
     const body = [
       'Hi',
       'You have been invited to an Evener project.',
-      `Follow this link to accept the invitation for ${
-        this.$store.getters.project.title
-      }`,
+      `Follow this link to accept the invitation for ${this.$store.getters.project.title}`,
       this.$store.state.inviteLink
     ]
-    return `mailto:${this.email}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body.join('\n'))}`
+    return `mailto:${this.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+      body.join('\n')
+    )}`
   }
   get emailIsValid() {
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/gi

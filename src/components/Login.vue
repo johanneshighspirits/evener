@@ -23,6 +23,14 @@ export default Vue.extend({
   methods: {
     startLogIn() {
       this.status = 'Logging in. Please wait...'
+      document.addEventListener('visibilitychange', this.handleVisibilityChange)
+    },
+    handleVisibilityChange() {
+      if (document.hidden) {
+        this.status = ''
+        console.log('document was hidden')
+      }
+      document.removeEventListener('visibilitychange', this.handleVisibilityChange)
     }
   },
   mounted() {

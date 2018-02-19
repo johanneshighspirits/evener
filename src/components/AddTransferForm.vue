@@ -2,9 +2,12 @@
   <form @submit.prevent="addTransfer" class="add-transfer-form form">
     <h2>Add transfers</h2>
     <div class="form-group import-transfers">
-      <label for="file" class="button bordered">
+      <label for="file" class="button bordered" style="margin-bottom:4px;">
         Import JSON from file
         <input id="file" type="file" @change="handleFileSelect">
+      </label>
+      <label class="button bordered" @click="exportTransfers">
+        Export transfers as JSON file
       </label>
     </div>
     <h3>Register a payment</h3>
@@ -46,9 +49,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Watch } from 'vue-property-decorator'
-import { Actions } from '../constants'
+import { Actions, Mutations } from '../constants'
 import Transfer from '../models/Transfer'
-import { TransferType, LegacyTransfer } from '../types/common'
+import { TransferType, JSONTransfer } from '../types/common'
 import User from '../models/User'
 
 interface HTMLInputEvent extends Event {
@@ -84,7 +87,7 @@ export default class AddTransferForm extends Vue {
   onTransferTypeChange(newType: TransferType, oldType: TransferType) {
     this.$nextTick(function() {
       let element = this.$refs.amount as HTMLInputElement
-      element.focus()
+      if (element) element.focus()
     })
   }
   @Watch('amount')
@@ -119,7 +122,6 @@ export default class AddTransferForm extends Vue {
   }
   addTransfer() {
     if (!this.validateForm()) return null
-
     const date = new Date().toISOString()
     let paidBy: User | undefined = undefined
     let receiver: User | undefined = undefined
@@ -135,6 +137,7 @@ export default class AddTransferForm extends Vue {
         receiver = this.$store.getters.users[this.$data.receiver]
     }
     const transfer = new Transfer(
+      '#',
       this.$data.amount,
       date,
       this.$data.transferType,
@@ -143,61 +146,66 @@ export default class AddTransferForm extends Vue {
       receiver
     )
     this.$store.dispatch(Actions.ADD_TRANSFER, transfer)
-
     this.resetForm()
-    this.$data.transferType = 1
-    this.$data.amount = 0
-    this.$data.message = ''
-    this.$data.receiver = ''
   }
   handleFileSelect(e: HTMLInputEvent) {
     let files = e.target.files
+    const projectId = this.$store.getters.project.id
     if (files) {
       let file = files[0]
       let fileReader = new FileReader()
       fileReader.onload = event => {
         let json = fileReader.result
-        let importedTransfers = JSON.parse(json)
-        this.importTransfers(importedTransfers)
+        let importedProject = JSON.parse(json)
+        console.log(`comparing ${importedProject.projectId} with ${projectId}`)
+        if (importedProject.projectId === projectId) {
+          this.importTransfers(importedProject.transfers)
+        } else {
+          this.$store.commit(Mutations.DISPLAY_NOTIFICATION, 'This is not the same project.')
+        }
       }
       fileReader.readAsText(file, 'utf8')
     }
   }
-  importTransfers(legacyTransfers: LegacyTransfer[]) {
-    // const users = this.$store.getters.users
-    // legacyTransfers.forEach(importedTransfer => {
-    //   let eventType = importedTransfer.eventType
-    //   if (importedTransfer.project !== '7b05f090cfd49b3c1d1270eeb6ad0407') {
-    //     console.warn('Ignore other project:', importedTransfer.project)
-    //     return false
-    //   }
-    //   if (
-    //     importedTransfer.eventType === TransferType.payment &&
-    //     importedTransfer.paidBy !== '' &&
-    //     importedTransfer.receiver !== ''
-    //   ) {
-    //     eventType = TransferType.repayment
-    //   }
-    //   let paidBy = oldUserIds[importedTransfer.paidBy]
-    //   if (paidBy === undefined && importedTransfer.eventType !== TransferType.income) {
-    //     console.warn("Couldn't find User for transfer", importedTransfer)
-    //     return false
-    //   }
-    //   let receiver = oldUserIds[importedTransfer.receiver]
-    //   if (importedTransfer.eventType === TransferType.repayment && receiver === undefined) {
-    //     console.warn('No receiver found for repayment transfer', importedTransfer)
-    //     return false
-    //   }
-    //   const transfer = new Transfer(
-    //     importedTransfer.amount,
-    //     new Date(importedTransfer.date).toISOString(),
-    //     eventType,
-    //     importedTransfer.message,
-    //     paidBy,
-    //     receiver
-    //   )
-    //   this.$store.dispatch(Actions.ADD_TRANSFER, transfer)
-    // })
+  exportTransfers() {
+    let project = this.$store.getters.project
+    let serializedTransfers = project.transfers.map((transfer: Transfer) =>
+      transfer.serialize(this.$store.getters.user.uid)
+    )
+    let dataStr = `data:text/json;charset=utf-8,{"projectId":"${project.projectId}","projectId":"${
+      project.id
+    }","transfers":${JSON.stringify(serializedTransfers)}}`
+    let downloadAnchorNode = document.createElement('a')
+    downloadAnchorNode.setAttribute('href', dataStr)
+    downloadAnchorNode.setAttribute('download', `Evener - ${project.title}.json`)
+    downloadAnchorNode.click()
+    downloadAnchorNode.remove()
+  }
+  importTransfers(importedTransfers: JSONTransfer[]) {
+    const users = this.$store.getters.users
+    importedTransfers.forEach(importedTransfer => {
+      let transferType = importedTransfer.transferType
+      let paidBy = users[importedTransfer.paidBy]
+      if (paidBy === undefined && importedTransfer.transferType !== TransferType.income) {
+        console.warn("Couldn't find User for transfer", importedTransfer)
+        return false
+      }
+      let receiver = users[importedTransfer.receiver]
+      if (importedTransfer.transferType === TransferType.repayment && receiver === undefined) {
+        console.warn('No receiver found for repayment transfer', importedTransfer)
+        return false
+      }
+      const transfer = new Transfer(
+        '#',
+        importedTransfer.amount,
+        new Date(importedTransfer.date).toISOString(),
+        transferType,
+        importedTransfer.message,
+        paidBy,
+        receiver
+      )
+      this.$store.dispatch(Actions.ADD_TRANSFER, transfer)
+    })
   }
 }
 </script>
@@ -259,7 +267,7 @@ export default class AddTransferForm extends Vue {
     color: #fff;
   }
   input[type='radio'] + label {
-    flex: 0.25 60px;
+    flex: 0.34 60px;
     padding: 1em;
   }
   .import-transfers {

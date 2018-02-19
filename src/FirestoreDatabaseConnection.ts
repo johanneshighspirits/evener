@@ -3,7 +3,7 @@ import { Project, TransferType } from './types/common'
 import User from './models/User'
 import Transfer from './models/Transfer'
 import { UserInfo, Invitation } from './types/common'
-import { Collections } from './constants'
+import { Collections, Mutations } from './constants'
 import { Store } from 'vuex'
 import { State } from './Store'
 
@@ -16,7 +16,9 @@ import { State } from './Store'
 // }
 
 class FirestoreDatabaseConnection {
+  projectUnsubscribe: () => void
   constructor(public store: Store<State>) {
+    this.projectUnsubscribe = () => {}
     // this.store = store
   }
 
@@ -27,6 +29,14 @@ class FirestoreDatabaseConnection {
       if (userDoc.exists) {
         const storedUser = userDoc.data()
         const user = new User({ ...storedUser })
+        if (storedUser.avatar !== userInfo.avatar) {
+          // Update avatar locally
+          user.avatar = userInfo.avatar
+          // Update avatar in firestore
+          usersRef.doc(userInfo.uid).update({
+            avatar: userInfo.avatar
+          })
+        }
         return user
       } else {
         // create user
@@ -103,7 +113,52 @@ class FirestoreDatabaseConnection {
     })
   }
 
-  populateProject = async (project: Project): Promise<Project> => {
+  watchProject = (project: Project): void => {
+    this.projectUnsubscribe()
+    this.populateProjectUsers(project).then(() => {
+      this.getCollectionRef(Collections.PROJECTS).then(projectsRef => {
+        this.projectUnsubscribe = projectsRef
+          .doc(project.id)
+          .collection(Collections.TRANSFERS)
+          .onSnapshot(snapshot => {
+            snapshot.docChanges.forEach(change => {
+              const transfer = Transfer.fromSnapshot(change.doc, project.users)
+              const transferId = change.doc.id
+              if (change.doc.metadata.hasPendingWrites) {
+                console.log('LOCAL CHANGE ONLY')
+                switch (change.type) {
+                  case 'added':
+                    console.log('Adding transfer to currentProject')
+                    this.store.commit(Mutations.ADD_TRANSFER, transfer)
+                    break
+                  case 'modified':
+                    console.log('Edit transfer')
+                    this.store.commit(Mutations.EDIT_TRANSFER, transfer)
+                    break
+                  case 'removed':
+                    console.log('Remove transfer from currentProject')
+                    this.store.commit(Mutations.DELETE_TRANSFER, transfer)
+                    break
+                }
+              } else {
+                console.log('INCOMING CHANGE - UPDATE UI!!!')
+                switch (change.type) {
+                  case 'added':
+                    console.log('Adding transfer to currentProject')
+                    this.store.commit(Mutations.ADD_TRANSFER, transfer)
+                    break
+                }
+              }
+            })
+          })
+      })
+    })
+  }
+
+  /**
+   * Populate Project with Users
+   */
+  populateProjectUsers = async (project: Project): Promise<Project> => {
     try {
       // Get projects ref
       const projectsRef = await this.getCollectionRef(Collections.PROJECTS)
@@ -134,18 +189,25 @@ class FirestoreDatabaseConnection {
         userFetchPromises.push(userFetchPromise)
       })
       await Promise.all(userFetchPromises)
+      return project
+    } catch (error) {
+      debugger
+      return project
+    }
+  }
+
+  populateProject = async (project: Project): Promise<Project> => {
+    try {
+      // Populate project with users
+      await this.populateProjectUsers(project)
       // Project is now populated with users, load transfers
+      const projectsRef = await this.getCollectionRef(Collections.PROJECTS)
+      const storedProjectRef = await projectsRef.doc(project.id)
       const transfersCollection = await storedProjectRef.collection(Collections.TRANSFERS).get()
       // Init transfers array
       project.transfers = []
       transfersCollection.forEach(transferDoc => {
-        let transferData = transferDoc.data()
-        // console.log(transferData)
-        let { amount, date, transferType, message, paidBy, receiver } = transferData
-        let paidByUser = project.users[paidBy]
-        let receiverUser = project.users[receiver]
-        let transfer = new Transfer(amount, date, transferType, message, paidByUser, receiverUser)
-        project.transfers.push(transfer)
+        project.transfers.push(Transfer.fromSnapshot(transferDoc, project.users))
       })
       // Sort according to date
       project.transfers.sort((a, b) => {

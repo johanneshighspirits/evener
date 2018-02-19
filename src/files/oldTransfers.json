@@ -1,1773 +1,1434 @@
-[
+{"title":"Familjepengen","projectId":"yGuXxTD9cdueFvHHOisB","transfers":[
   {
     "message": "Föräldrapeng",
     "amount": 11555,
-    "date": "2017-02-23",
+    "date": "2017-02-23T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 0,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 67
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 0,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Bärsele",
     "amount": 200,
-    "date": "2017-02-19",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-02-19T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 66
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Skuld jan 2017",
     "amount": 23595,
-    "date": "2017-01-01",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "receiver": "98644168a2d37ec3cb76f29d36ac15a2",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 65
+    "date": "2017-01-01T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "receiver": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "transferType": 2,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Reskassa",
     "amount": 25000,
-    "date": "2017-02-18",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-02-18T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 61
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Pysslingen",
     "amount": 968,
-    "date": "2017-02-18",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-02-18T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 64
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Parkman",
     "amount": 45,
-    "date": "2017-02-18",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-02-18T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 63
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Lucylla",
     "amount": 985,
-    "date": "2017-02-18",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-02-18T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 62
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Allkort",
     "amount": 8000,
-    "date": "2017-02-03",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-02-03T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 60
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Allkort",
     "amount": 5000,
-    "date": "2017-02-14",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-02-14T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 59
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "P-böter",
     "amount": 500,
-    "date": "2017-02-07",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-02-07T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 57
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Käk",
     "amount": 350,
-    "date": "2017-02-10",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-02-10T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 58
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Coop",
     "amount": 109,
-    "date": "2017-02-03",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-02-03T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 56
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Coop",
     "amount": 302,
-    "date": "2017-01-31",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-01-31T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 55
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "OKQ8",
     "amount": 607,
-    "date": "2017-01-29",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-01-29T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 54
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "OKQ8",
     "amount": 531,
-    "date": "2017-01-29",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-01-29T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 53
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Esters pass",
     "amount": 350,
-    "date": "2017-02-01",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-02-01T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 52
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Återbetalning",
     "amount": 9000,
-    "date": "2017-01-25",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 51
+    "date": "2017-01-25T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 2,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Återbetalning",
     "amount": 8898,
-    "date": "2017-01-10",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 50
+    "date": "2017-01-10T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 2,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Väddö",
     "amount": 14719,
-    "date": "2017-01-01",
+    "date": "2017-01-01T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "98644168a2d37ec3cb76f29d36ac15a2",
-    "eventType": 0,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 49
+    "receiver": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "transferType": 0,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Föräldrapeng",
     "amount": 4828,
-    "date": "2017-01-01",
+    "date": "2017-01-01T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "98644168a2d37ec3cb76f29d36ac15a2",
-    "eventType": 0,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 48
+    "receiver": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "transferType": 0,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Utgifter",
     "amount": 500,
-    "date": "2017-01-01",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-01-01T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 47
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "HSB-avgift",
     "amount": 3140,
-    "date": "2017-01-26",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-01-26T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 46
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Utgifter",
     "amount": 2367,
-    "date": "2017-01-01",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-01-01T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 45
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Allkort",
     "amount": 10000,
-    "date": "2017-01-01",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-01-01T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 44
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Räkningar jan 2017",
     "amount": 2675,
-    "date": "2017-01-01",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-01-01T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 43
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Vattenfall",
     "amount": 346,
-    "date": "2017-03-15",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-03-15T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 68
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Lön",
     "amount": 22000,
-    "date": "2017-03-16",
+    "date": "2017-03-16T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 0,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 69
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 0,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Föräldrapeng",
     "amount": 3917,
-    "date": "2017-03-24",
+    "date": "2017-03-24T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 0,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 70
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 0,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Räkor",
     "amount": 9100,
-    "date": "2017-03-28",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-03-28T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 71
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Lån på tvåtusen",
     "amount": 4000,
-    "date": "2017-03-29",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-03-29T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 72
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Lön jan",
     "amount": 25000,
-    "date": "2017-03-29",
+    "date": "2017-03-29T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 0,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 73
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 0,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Coop",
     "amount": 259,
-    "date": "2017-03-31",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-03-31T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 74
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Allkort",
     "amount": 15000,
-    "date": "2017-03-31",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-03-31T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 75
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Nyår till Lisa",
     "amount": 330,
-    "date": "2017-04-02",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-04-02T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 76
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Coop",
     "amount": 573,
-    "date": "2017-04-15",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-04-15T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 77
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Coop",
     "amount": 463,
-    "date": "2017-04-17",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-04-17T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 78
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Hemköp",
     "amount": 389,
-    "date": "2017-04-20",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-04-20T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 79
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Coop",
     "amount": 412,
-    "date": "2017-04-20",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-04-20T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 80
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Allkort",
     "amount": 6500,
-    "date": "2017-04-21",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-04-21T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 81
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Vattenfall",
     "amount": 326,
-    "date": "2017-05-04",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-05-04T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 82
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Föräldrapeng jan-maj",
     "amount": 26713,
-    "date": "2017-05-08",
+    "date": "2017-05-08T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "98644168a2d37ec3cb76f29d36ac15a2",
-    "eventType": 0,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 83
+    "receiver": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "transferType": 0,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Till johannes",
     "amount": 20000,
-    "date": "2017-05-08",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 84
+    "date": "2017-05-08T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 2,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Lön maj",
     "amount": 25000,
-    "date": "2017-05-08",
+    "date": "2017-05-08T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 0,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 85
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 0,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Transaktionskontot",
     "amount": 2000,
-    "date": "2017-05-09",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-05-09T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 86
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Från sparkontot",
     "amount": 20000,
-    "date": "2017-05-13",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-05-13T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 87
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Skansen",
     "amount": 300,
-    "date": "2017-05-21",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-05-21T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 88
-  },
-  {
-    "message": "Ica Älmsta",
-    "amount": 1200,
-    "date": "2017-05-25",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "8064d0d662e59ae234adbf2a9db742eb",
-    "index": 89
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Fkassa",
     "amount": 9820,
-    "date": "2017-05-28",
+    "date": "2017-05-28T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "98644168a2d37ec3cb76f29d36ac15a2",
-    "eventType": 0,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 90
+    "receiver": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "transferType": 0,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Lön",
     "amount": 25000,
-    "date": "2017-05-28",
+    "date": "2017-05-28T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "98644168a2d37ec3cb76f29d36ac15a2",
-    "eventType": 0,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 91
+    "receiver": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "transferType": 0,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Allkort",
     "amount": 15000,
-    "date": "2017-05-28",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-05-28T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 92
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Transaktionskonto",
     "amount": 10000,
-    "date": "2017-05-28",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-05-28T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 93
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Till johannes",
     "amount": 5000,
-    "date": "2017-05-28",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 94
+    "date": "2017-05-28T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 2,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Blöjor",
     "amount": 225,
-    "date": "2017-05-28",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-05-28T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 95
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Restaurangen",
     "amount": 105,
-    "date": "2017-05-28",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-05-28T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 96
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Älmsta Ica",
     "amount": 350,
-    "date": "2017-05-29",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-05-29T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 97
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Panevino",
     "amount": 216,
-    "date": "2017-05-29",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-05-29T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 98
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Bär",
     "amount": 64,
-    "date": "2017-05-29",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-05-29T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 99
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Brf",
     "amount": 3140,
-    "date": "2017-05-29",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-05-29T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 100
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Ränta",
     "amount": 3500,
-    "date": "2017-05-29",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-05-29T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 101
-  },
-  {
-    "message": "",
-    "amount": 567,
-    "date": "2017-06-08",
-    "paidBy": "539457253335a6fb6c628dd32cc7fa26",
-    "receiver": "",
-    "eventType": 1,
-    "userID": "539457253335a6fb6c628dd32cc7fa26",
-    "project": "a7c5c9ec42f9084a1a296ef4805696fb",
-    "index": 102
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Allkort",
     "amount": 3000,
-    "date": "2017-06-21",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-06-21T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 103
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Kassan",
     "amount": 9792,
-    "date": "2017-06-22",
+    "date": "2017-06-22T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 0,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 104
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 0,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Hemköp",
     "amount": 112,
-    "date": "2017-06-30",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-06-30T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 105
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Käk",
     "amount": 445,
-    "date": "2017-06-30",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-06-30T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 106
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Restaurangen",
     "amount": 206,
-    "date": "2017-07-02",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-07-02T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 107
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Pizza",
     "amount": 235,
-    "date": "2017-07-03",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-07-03T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 108
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Coop",
     "amount": 130,
-    "date": "2017-07-03",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-07-03T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 109
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Ikea",
     "amount": 200,
-    "date": "2017-07-05",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-07-05T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 110
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Vattenfall",
     "amount": 327,
-    "date": "2017-07-05",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-07-05T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 111
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Ica Älmsta",
     "amount": 322,
-    "date": "2017-07-09",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-07-09T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 112
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Norrtälje",
     "amount": 244,
-    "date": "2017-07-11",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-07-11T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 113
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Allkort",
     "amount": 2000,
-    "date": "2017-07-15",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-07-15T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 114
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Pysslingen",
     "amount": 968,
-    "date": "2017-07-17",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-07-17T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 115
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Bensin",
     "amount": 626,
-    "date": "2017-07-17",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-07-17T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 116
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Max",
     "amount": 256,
-    "date": "2017-07-17",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-07-17T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 117
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Från Tove",
     "amount": 535,
-    "date": "2017-07-18",
+    "date": "2017-07-18T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 0,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 118
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 0,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Falupizza",
     "amount": 950,
-    "date": "2017-07-23",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-07-23T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 119
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Räkningar",
     "amount": 10000,
-    "date": "2017-07-24",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-07-24T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 120
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Kassan",
     "amount": 14688,
-    "date": "2017-07-25",
+    "date": "2017-07-25T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 0,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 121
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 0,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Engström",
     "amount": 130,
-    "date": "2017-07-26",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-07-26T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 122
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Ellevio o Gas",
     "amount": 1188,
-    "date": "2017-08-02",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-08-02T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 123
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Graninge",
     "amount": 330,
-    "date": "2017-08-02",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-08-02T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 124
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Allkort",
     "amount": 1000,
-    "date": "2017-08-07",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-08-07T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 125
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Ramblas",
     "amount": 800,
-    "date": "2017-08-07",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-08-07T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 126
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Allkort",
     "amount": 2500,
-    "date": "2017-08-12",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-08-12T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 127
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Allkort",
     "amount": 10000,
-    "date": "2017-08-12",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-08-12T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 128
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Hyra",
     "amount": 3140,
-    "date": "2017-08-15",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-08-15T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 129
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Coop",
     "amount": 433,
-    "date": "2017-08-22",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-08-22T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 130
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Coop",
     "amount": 190,
-    "date": "2017-08-23",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-08-23T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 131
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Pysslingen",
     "amount": 1000,
-    "date": "2017-08-23",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-08-23T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 132
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Kassan",
     "amount": 12240,
-    "date": "2017-08-24",
+    "date": "2017-08-24T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 0,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 133
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 0,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Allkort",
     "amount": 5000,
-    "date": "2017-08-26",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-08-26T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 134
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "TransaktionsKonto",
     "amount": 10000,
-    "date": "2017-09-05",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-09-05T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 135
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Vattenfall",
     "amount": 314,
-    "date": "2017-09-05",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-09-05T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 136
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Csn",
     "amount": 13575,
-    "date": "2017-09-08",
+    "date": "2017-09-08T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "98644168a2d37ec3cb76f29d36ac15a2",
-    "eventType": 0,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 137
+    "receiver": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "transferType": 0,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Skatteåterbäring",
     "amount": 3500,
-    "date": "2017-09-08",
+    "date": "2017-09-08T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "98644168a2d37ec3cb76f29d36ac15a2",
-    "eventType": 0,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 138
+    "receiver": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "transferType": 0,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Kredit",
     "amount": 8480,
-    "date": "2017-09-08",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 139
+    "date": "2017-09-08T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 2,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Årstiderna",
     "amount": 1532,
-    "date": "2017-09-08",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-09-08T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 140
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Allkontot",
     "amount": 3000,
-    "date": "2017-09-08",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-09-08T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 141
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Allkortet",
     "amount": 4500,
-    "date": "2017-09-15",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-09-15T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 142
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Räkningar",
     "amount": 10000,
-    "date": "2017-09-25",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-09-25T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 143
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Lön sept",
     "amount": 24031,
-    "date": "2017-09-25",
+    "date": "2017-09-25T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 0,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 144
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 0,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Hyra sep",
     "amount": 3140,
-    "date": "2017-09-27",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-09-27T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 145
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Gas",
     "amount": 744,
-    "date": "2017-10-03",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-10-03T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 146
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Ellevio",
     "amount": 446,
-    "date": "2017-10-04",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-10-04T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 147
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Csn",
     "amount": 10980,
-    "date": "2017-10-05",
+    "date": "2017-10-05T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "98644168a2d37ec3cb76f29d36ac15a2",
-    "eventType": 0,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 148
+    "receiver": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "transferType": 0,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Diverse",
     "amount": 2202,
-    "date": "2017-10-05",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-10-05T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 149
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Allkortet",
     "amount": 8000,
-    "date": "2017-10-05",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-10-05T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 150
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Årstiderna",
     "amount": 1506,
-    "date": "2017-10-06",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 151
+    "date": "2017-10-06T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 2,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Allkort",
     "amount": 500,
-    "date": "2017-10-10",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-10-10T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 152
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Lön",
     "amount": 24031,
-    "date": "2017-10-26",
+    "date": "2017-10-26T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 0,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 153
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 0,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Max",
     "amount": 279,
-    "date": "2017-10-28",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-10-28T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 154
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Vinterdäck",
     "amount": 649,
-    "date": "2017-10-28",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-10-28T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 155
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Bilbarnstol",
     "amount": 2390,
-    "date": "2017-10-28",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-10-28T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 156
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Ränta Sep",
     "amount": 3500,
-    "date": "2017-10-28",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-10-28T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 157
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Ränta Okt",
     "amount": 3500,
-    "date": "2017-10-28",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-10-28T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 158
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Coop",
     "amount": 457,
-    "date": "2017-10-30",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-10-30T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 159
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Hemköp",
     "amount": 168,
-    "date": "2017-10-30",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-10-30T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 160
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Bensin",
     "amount": 587,
-    "date": "2017-10-30",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-10-30T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 161
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Csn",
     "amount": 10980,
-    "date": "2017-10-31",
+    "date": "2017-10-31T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "98644168a2d37ec3cb76f29d36ac15a2",
-    "eventType": 0,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 162
+    "receiver": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "transferType": 0,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Årstiderna",
     "amount": 1506,
-    "date": "2017-10-31",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-10-31T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 163
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Årstiderna",
     "amount": 753,
-    "date": "2017-10-31",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-10-31T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 164
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Allkortet",
     "amount": 3000,
-    "date": "2017-10-31",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-10-31T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 165
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Coop",
     "amount": 387,
-    "date": "2017-11-01",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-11-01T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 166
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Vattenfall",
     "amount": 462,
-    "date": "2017-11-04",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-11-04T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 167
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Allkortet",
     "amount": 2500,
-    "date": "2017-11-04",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-11-04T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 168
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Städ",
     "amount": 985,
-    "date": "2017-11-12",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-11-12T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 169
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Coop",
     "amount": 529,
-    "date": "2017-11-17",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-11-17T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 170
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Lön",
     "amount": 24031,
-    "date": "2017-11-25",
+    "date": "2017-11-25T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 0,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 171
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 0,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Coop",
     "amount": 319,
-    "date": "2017-11-25",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-11-25T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 172
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Allkort",
     "amount": 10000,
-    "date": "2017-11-25",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-11-25T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 173
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Paradiset",
     "amount": 160,
-    "date": "2017-11-25",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-11-25T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 174
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Årstiderna",
     "amount": 738,
-    "date": "2017-12-01",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-12-01T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 175
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Årstiderna",
     "amount": 815,
-    "date": "2017-12-01",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-12-01T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 176
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "DN",
     "amount": 160,
-    "date": "2017-12-01",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-12-01T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 177
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Csn",
     "amount": 10900,
-    "date": "2017-12-03",
+    "date": "2017-12-03T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "98644168a2d37ec3cb76f29d36ac15a2",
-    "eventType": 0,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 178
+    "receiver": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "transferType": 0,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Allkortet",
     "amount": 2591,
-    "date": "2017-12-04",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-12-04T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 179
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Årstiderna",
     "amount": 665,
-    "date": "2017-12-04",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-12-04T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 180
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Årstiderna",
     "amount": 753,
-    "date": "2017-12-04",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-12-04T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 181
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "T-Jarlen",
     "amount": 355,
-    "date": "2017-12-11",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-12-11T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 182
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Lön dec",
     "amount": 23001,
-    "date": "2017-12-22",
+    "date": "2017-12-22T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 0,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 183
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 0,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Allkortet",
     "amount": 10000,
-    "date": "2017-12-23",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-12-23T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 184
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Mat/årstiderna",
     "amount": 3012,
-    "date": "2017-12-27",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-12-27T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 185
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Csn",
     "amount": 8321,
-    "date": "2017-12-27",
+    "date": "2017-12-27T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "98644168a2d37ec3cb76f29d36ac15a2",
-    "eventType": 0,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 186
+    "receiver": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "transferType": 0,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Gemensamt kredit",
     "amount": 2810,
-    "date": "2017-12-27",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-12-27T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 187
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Julgran",
     "amount": 450,
-    "date": "2017-12-27",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2017-12-27T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 188
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Räkor",
     "amount": 4000,
-    "date": "2017-12-27",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2017-12-27T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 189
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Ica Gärdet",
     "amount": 282,
-    "date": "2018-01-14",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2018-01-14T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 190
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Vattenfall",
     "amount": 548,
-    "date": "2018-01-14",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2018-01-14T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 191
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Gas",
     "amount": 744,
-    "date": "2018-01-16",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2018-01-16T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 192
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "El",
     "amount": 562,
-    "date": "2018-01-16",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2018-01-16T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 193
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Restaurangen",
     "amount": 215,
-    "date": "2018-01-20",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2018-01-20T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 194
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Coop",
     "amount": 500,
-    "date": "2018-01-20",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2018-01-20T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 195
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Paradiset",
     "amount": 500,
-    "date": "2018-01-22",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2018-01-22T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 196
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Lön jan",
     "amount": 23842,
-    "date": "2018-01-25",
+    "date": "2018-01-25T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "eventType": 0,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 197
+    "receiver": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
+    "transferType": 0,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Allkort",
     "amount": 7500,
-    "date": "2018-01-26",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2018-01-26T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 198
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": "Räkningar",
     "amount": 3500,
-    "date": "2018-01-30",
-    "paidBy": "ee5d03ed927d683ff79fa00bd2a937bd",
+    "date": "2018-01-30T00:00:00.000Z",
+    "paidBy": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23",
     "receiver": "",
-    "eventType": 1,
-    "userID": "ee5d03ed927d683ff79fa00bd2a937bd",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 199
+    "transferType": 1,
+    "uid": "9nDrJ2WuYyVB7HEuP9MsLkhIBz23"
   },
   {
     "message": 16578,
     "amount": 0,
-    "date": "2018-02-02",
+    "date": "2018-02-02T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "98644168a2d37ec3cb76f29d36ac15a2",
-    "eventType": 0,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 200
+    "receiver": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "transferType": 0,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Csn",
     "amount": 16578,
-    "date": "2018-02-02",
+    "date": "2018-02-02T00:00:00.000Z",
     "paidBy": "",
-    "receiver": "98644168a2d37ec3cb76f29d36ac15a2",
-    "eventType": 0,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 201
+    "receiver": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
+    "transferType": 0,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Årstiderna",
     "amount": 2707,
-    "date": "2018-02-02",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2018-02-02T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 202
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   },
   {
     "message": "Coop",
     "amount": 719,
-    "date": "2018-02-02",
-    "paidBy": "98644168a2d37ec3cb76f29d36ac15a2",
+    "date": "2018-02-02T00:00:00.000Z",
+    "paidBy": "R9TWl0TF7NaTo76hAJQ62vorfwA2",
     "receiver": "",
-    "eventType": 1,
-    "userID": "98644168a2d37ec3cb76f29d36ac15a2",
-    "project": "7b05f090cfd49b3c1d1270eeb6ad0407",
-    "index": 203
+    "transferType": 1,
+    "uid": "R9TWl0TF7NaTo76hAJQ62vorfwA2"
   }
 ]
+}

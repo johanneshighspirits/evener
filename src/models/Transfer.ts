@@ -6,6 +6,7 @@ export default class Transfer {
   paidBy: User | undefined
   receiver: User | undefined
   constructor(
+    public id: string,
     public amount: number,
     date: string,
     public transferType: TransferType,
@@ -41,6 +42,9 @@ export default class Transfer {
     }
   }
 
+  /**
+   * Convert Transfer to prepare for firestore
+   */
   serialize = (uid: string) => {
     const { date, paidBy, receiver, amount, message, transferType } = this
     return {
@@ -52,5 +56,27 @@ export default class Transfer {
       transferType,
       uid
     }
+  }
+
+  /**
+   * Return Transfer from firestore doc
+   */
+  static fromSnapshot = (
+    transferDoc: firebase.firestore.DocumentSnapshot,
+    users: { [key: string]: User }
+  ) => {
+    let transferData = transferDoc.data()
+    let { amount, date, transferType, message, paidBy, receiver } = transferData
+    let paidByUser = users[paidBy]
+    let receiverUser = users[receiver]
+    return new Transfer(
+      transferDoc.id,
+      amount,
+      date,
+      transferType,
+      message,
+      paidByUser,
+      receiverUser
+    )
   }
 }

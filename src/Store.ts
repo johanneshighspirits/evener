@@ -57,6 +57,11 @@ const mutations: MutationTree<State> = {
   [Mutations.UPDATE_PROJECT_ID]: (state, projectId) => {
     state.projectId = projectId
   },
+  /* Transfers */
+  [Mutations.ADD_TRANSFER]: (state, transfer: Transfer) => {
+    // Add Transfer to beginning of array
+    state.projects[state.projectId].transfers.unshift(transfer)
+  },
   /* Notifications */
   [Mutations.DISPLAY_NOTIFICATION]: (state, message) => {
     console.log('[NOTIFICATION]', message)
@@ -115,8 +120,10 @@ const actions: ActionTree<State, any> = {
     try {
       let project = state.projects[projectId]
       if (project.transfers.length === 0) {
+        // Watch transfers and users
+        db.watchProject(project)
         // Load transfers and users
-        await db.populateProject(project)
+        // await db.populateProject(project)
       }
       // Make sure currentProjectId is updated
       if (state.user && state.user.currentProject !== projectId) {
