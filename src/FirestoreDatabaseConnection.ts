@@ -125,10 +125,10 @@ class FirestoreDatabaseConnection {
               const transfer = Transfer.fromSnapshot(change.doc, project.users)
               const transferId = change.doc.id
               if (change.doc.metadata.hasPendingWrites) {
-                console.log('LOCAL CHANGE ONLY')
+                // console.log('LOCAL CHANGE ONLY')
                 switch (change.type) {
                   case 'added':
-                    console.log('Adding transfer to currentProject')
+                    console.log(`Adding transfer ${transfer.date} to currentProject`)
                     this.store.commit(Mutations.ADD_TRANSFER, transfer)
                     break
                   case 'modified':
@@ -141,11 +141,19 @@ class FirestoreDatabaseConnection {
                     break
                 }
               } else {
-                console.log('INCOMING CHANGE - UPDATE UI!!!')
+                // console.log('INCOMING CHANGE - UPDATE UI!!!')
                 switch (change.type) {
                   case 'added':
-                    console.log('Adding transfer to currentProject')
+                    console.log(`Adding transfer ${transfer.date} to currentProject`)
                     this.store.commit(Mutations.ADD_TRANSFER, transfer)
+                    break
+                  case 'modified':
+                    console.log('Edit transfer')
+                    this.store.commit(Mutations.EDIT_TRANSFER, transfer)
+                    break
+                  case 'removed':
+                    console.log('Remove transfer from currentProject')
+                    this.store.commit(Mutations.DELETE_TRANSFER, transfer)
                     break
                 }
               }
@@ -196,32 +204,39 @@ class FirestoreDatabaseConnection {
     }
   }
 
-  populateProject = async (project: Project): Promise<Project> => {
-    try {
-      // Populate project with users
-      await this.populateProjectUsers(project)
-      // Project is now populated with users, load transfers
-      const projectsRef = await this.getCollectionRef(Collections.PROJECTS)
-      const storedProjectRef = await projectsRef.doc(project.id)
-      const transfersCollection = await storedProjectRef.collection(Collections.TRANSFERS).get()
-      // Init transfers array
-      project.transfers = []
-      transfersCollection.forEach(transferDoc => {
-        project.transfers.push(Transfer.fromSnapshot(transferDoc, project.users))
-      })
-      // Sort according to date
-      project.transfers.sort((a, b) => {
-        return a.date < b.date ? 1 : -1
-      })
+  // populateProject = async (project: Project): Promise<Project> => {
+  //   try {
+  //     // Populate project with users
+  //     await this.populateProjectUsers(project)
+  //     // Project is now populated with users, load transfers
+  //     await this.populateProjectTransfers(project)
+  //     // All done
+  //     return Promise.resolve(project)
+  //   } catch (error) {
+  //     console.error(error)
+  //     debugger
+  //     return Promise.reject(error)
+  //   }
+  // }
 
-      // All done
-      return Promise.resolve(project)
-    } catch (error) {
-      console.error(error)
-      debugger
-      return Promise.reject(error)
-    }
-  }
+  // populateProjectTransfers = async (project: Project): Promise<Project> => {
+  //   try {
+  //     if (!project.users) await this.populateProjectUsers(project)
+  //     const projectsRef = await this.getCollectionRef(Collections.PROJECTS)
+  //     const storedProjectRef = await projectsRef.doc(project.id)
+  //     const transfersCollection = await storedProjectRef.collection(Collections.TRANSFERS).get()
+  //     // Init transfers array
+  //     project.transfers = []
+  //     transfersCollection.forEach(transferDoc => {
+  //       project.transfers.push(Transfer.fromSnapshot(transferDoc, project.users))
+  //     })
+  //     // Sort according to date
+  //     project.transfers = Transfer.sortByDate(project.transfers)
+  //     return Promise.resolve(project)
+  //   } catch (error) {
+  //     return Promise.reject(error)
+  //   }
+  // }
 
   addTransfer = (transfer: Transfer, projectId: string, userId: string): Promise<object> => {
     return new Promise(async (resolve, reject) => {
@@ -257,6 +272,42 @@ class FirestoreDatabaseConnection {
         }
         const transferDoc = await transfersRef.add(serializedTransfer)
         return resolve(transferDoc)
+      } catch (error) {
+        console.error(error)
+        return reject(error)
+      }
+    })
+  }
+
+  addTransfers = (transfers: Transfer[], project: Project, userId: string): Promise<object> => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const projectsRef = await this.getCollectionRef(Collections.PROJECTS)
+        const transfersRef = await projectsRef.doc(project.id).collection(Collections.TRANSFERS)
+        // Find existing transfers
+        const existingTransfers = project.transfers.slice()
+        // Sort added transfers
+        const sortedTransfers = Transfer.sortByDate(transfers)
+        // Init batch
+        const db = firebase.firestore()
+        let batch = db.batch()
+        // Loop added transfers
+        sortedTransfers.forEach((transfer, i) => {
+          // Check if transfer already exists
+          if (existingTransfers.find(storedTransfer => storedTransfer.isEqual(transfer))) {
+            // Ignore existing transfer
+            console.log('Transfer already exists, ignoring', transfer)
+          } else {
+            // Add transfer
+            // Prepare for storage
+            const serializedTransfer = transfer.serialize(userId)
+            // Create doc ref
+            let docRef = transfersRef.doc()
+            // Add transfer
+            batch.set(docRef, serializedTransfer)
+          }
+        })
+        await batch.commit()
       } catch (error) {
         console.error(error)
         return reject(error)

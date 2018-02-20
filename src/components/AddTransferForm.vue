@@ -183,6 +183,7 @@ export default class AddTransferForm extends Vue {
   }
   importTransfers(importedTransfers: JSONTransfer[]) {
     const users = this.$store.getters.users
+    const transfers: Transfer[] = []
     importedTransfers.forEach(importedTransfer => {
       let transferType = importedTransfer.transferType
       let paidBy = users[importedTransfer.paidBy]
@@ -204,8 +205,9 @@ export default class AddTransferForm extends Vue {
         paidBy,
         receiver
       )
-      this.$store.dispatch(Actions.ADD_TRANSFER, transfer)
+      transfers.push(transfer)
     })
+    this.$store.dispatch(Actions.ADD_TRANSFERS, transfers)
   }
 }
 </script>

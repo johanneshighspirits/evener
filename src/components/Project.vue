@@ -4,8 +4,8 @@
       <h2>{{ project.title }}</h2>
       <invite-collaborator-form/>
       <add-transfer-form/>
-      <calculator :transfers="project.transfers" :users="project.users"/>
-      <transfers :transfers="project.transfers"/>
+      <calculator/>
+      <transfers/>
     </section>
     <section v-else>
       <div v-if="noUserProjects">
@@ -24,9 +24,9 @@ import Transfers from './Transfers.vue'
 import Calculator from './Calculator.vue'
 import AddTransferForm from './AddTransferForm.vue'
 import InviteCollaboratorForm from './InviteCollaboratorForm.vue'
+import { Project } from '../types/common'
 export default Vue.extend({
   name: 'project',
-  props: ['project'],
   components: {
     Transfers,
     Calculator,
@@ -36,6 +36,9 @@ export default Vue.extend({
   computed: {
     noUserProjects(): boolean {
       return this.$store.state.noUserProjects
+    },
+    project(): Project {
+      return this.$store.getters.project
     }
   }
 })

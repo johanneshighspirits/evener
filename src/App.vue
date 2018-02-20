@@ -147,4 +147,28 @@ body {
     transform: scale(0.1, 0.1);
   }
 }
+.fade-in-left {
+  &-enter {
+    opacity: 0;
+    transform: translateX(2em);
+    background-color: #ffc708;
+  }
+  &-enter-to {
+    opacity: 1;
+    transform: translateX(0px);
+    background-color: #fff;
+  }
+  &-enter-active,
+  &-leave-active {
+    transition: all 0.5s ease-in-out;
+  }
+  &-leave {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  &-leave-to {
+    opacity: 0;
+    transform: translateX(-50em);
+  }
+}
 </style>

@@ -42,6 +42,22 @@ export default class Transfer {
     }
   }
 
+  isEqual = (compareTransfer: Transfer): boolean => {
+    return (
+      compareTransfer.message === this.message &&
+      compareTransfer.amount === this.amount &&
+      compareTransfer.paidBy === this.paidBy &&
+      compareTransfer.receiver === this.receiver &&
+      compareTransfer.date.getTime() === this.date.getTime()
+    )
+  }
+
+  static sortByDate = (transfers: Transfer[]): Transfer[] => {
+    return transfers.sort((t1, t2) => {
+      return t1.date.getTime() <= t2.date.getTime() ? 1 : -1
+    })
+  }
+
   /**
    * Convert Transfer to prepare for firestore
    */

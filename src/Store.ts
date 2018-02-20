@@ -59,8 +59,31 @@ const mutations: MutationTree<State> = {
   },
   /* Transfers */
   [Mutations.ADD_TRANSFER]: (state, transfer: Transfer) => {
-    // Add Transfer to beginning of array
-    state.projects[state.projectId].transfers.unshift(transfer)
+    // Loop through existing transfers and find the first date that is sooner (less) than
+    // incoming transfer date.
+    let transferId = state.projects[state.projectId].transfers.findIndex(localTransfer => {
+      return localTransfer.date.getTime() < transfer.date.getTime()
+    })
+    if (transferId > -1) {
+      state.projects[state.projectId].transfers.splice(transferId, 0, transfer)
+    } else {
+      // Add transfer to end of array
+      state.projects[state.projectId].transfers.push(transfer)
+    }
+  },
+  [Mutations.EDIT_TRANSFER]: (state, transfer: Transfer) => {
+    // Update Transfer
+    let transferId = state.projects[state.projectId].transfers.findIndex(localTransfer => {
+      return localTransfer.id === transfer.id
+    })
+    Vue.set(state.projects[state.projectId].transfers, transferId, transfer)
+  },
+  [Mutations.DELETE_TRANSFER]: (state, transfer: Transfer) => {
+    // Delete Transfer from array
+    let transferId = state.projects[state.projectId].transfers.findIndex(localTransfer => {
+      return localTransfer.id === transfer.id
+    })
+    state.projects[state.projectId].transfers.splice(transferId, 1)
   },
   /* Notifications */
   [Mutations.DISPLAY_NOTIFICATION]: (state, message) => {
@@ -144,6 +167,16 @@ const actions: ActionTree<State, any> = {
       debugger
     }
   },
+  [Actions.ADD_TRANSFERS]: async ({ state, commit }, transfers) => {
+    try {
+      if (state.user === undefined) throw new Error('No User')
+      await db.addTransfers(transfers, state.projects[state.projectId], state.user.uid)
+      commit(Mutations.DISPLAY_NOTIFICATION, 'Transfer added: - ' + transfers.message)
+    } catch (error) {
+      commit(Mutations.DISPLAY_NOTIFICATION, error)
+      debugger
+    }
+  },
   /* Collaboration */
   /**
    * Register an invitation at firestore /invitations/{inviteId}
@@ -202,6 +235,9 @@ const actions: ActionTree<State, any> = {
 const getters: GetterTree<State, any> = {
   project: state => {
     return state.projects[state.projectId]
+  },
+  transfers: state => {
+    return state.projects[state.projectId].transfers
   },
   user: state => {
     return state.user

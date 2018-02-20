@@ -1,15 +1,17 @@
 <template>
-  <section>
-    <h4>Balance</h4>
-    <ul class="debt-boxes-container">
-      <div v-for="(balance, i) in balances" class="debt-box" :key="i">
-        <h5>{{ balance.name }}</h5>
-        <div class="debt-result" :class="{ green: balance.balance >= 0, red: balance.balance < 0 }">
-          <p>{{ balance.balance.toFixed(2) }}</p>
+  <transition name="fade-in-up">
+    <section v-if="transfers.length > 0">
+      <h4>Balance</h4>
+      <ul class="debt-boxes-container">
+        <div v-for="(balance, i) in balances" class="debt-box" :key="i">
+          <h5>{{ balance.name }}</h5>
+          <div class="debt-result" :class="{ green: balance.balance >= 0, red: balance.balance < 0 }">
+            <p>{{ balance.balance.toFixed(2) }}</p>
+          </div>
         </div>
-      </div>
-    </ul>
-  </section>
+      </ul>
+    </section>
+    </transition>
 </template>
 
 <script lang="ts">
@@ -23,11 +25,15 @@ import { TransferType } from '../types/common'
 
 @Component
 export default class Calculator extends Vue {
-  @Prop({ default: [] })
-  transfers: Array<Transfer> | undefined
-  @Prop({ default: [] })
-  users: Array<User> | undefined
-
+  get project() {
+    return this.$store.getters.project
+  }
+  get users() {
+    return this.$store.getters.users
+  }
+  get transfers() {
+    return this.$store.getters.transfers
+  }
   get balances() {
     // [TODO]: Move this logic to its own module
 
@@ -35,11 +41,11 @@ export default class Calculator extends Vue {
      * Map transfers to users
      */
     let balances: { [key: string]: { balance: number; name: string } } = {}
-    if (this.$props.transfers && this.$props.transfers.length > 0) {
-      let transfers = Object.values(this.$props.transfers) as Transfer[]
+    if (this.transfers && this.transfers.length > 0) {
+      let transfers = Object.values(this.transfers) as Transfer[]
       // var to hold all users while we calculate their balances
       // Actual count of users (2 == 2 users)
-      let users = Object.values(this.$store.getters.users) as User[]
+      let users = Object.values(this.users) as User[]
       let userCount = users.length
       users.forEach((user: User) => {
         const userId = user.uid

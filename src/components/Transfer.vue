@@ -1,5 +1,5 @@
 <template>
-  <li class="transfer-container" :class="{ last: isLast }">
+  <li class="transfer-container" :class="{ last: isLast }" @contextmenu.prevent="handleContextMenu">
     <div class="transfer transfer-paid-by" :style="'background-image: url(' + avatar + ')'">
       <span>{{ initials }}</span>
     </div>
@@ -42,6 +42,12 @@ export default Vue.extend({
       let receiverOrPayer: User | undefined = paidBy
       if (transferType === TransferType.income) receiverOrPayer = receiver
       return receiverOrPayer !== undefined ? receiverOrPayer.avatar : ''
+    }
+  },
+  methods: {
+    handleContextMenu(e: any) {
+      console.log(e)
+      console.log('delete?', this.transfer.id)
     }
   }
 })
