@@ -1,5 +1,5 @@
 <template>
-  <li class="transfer-container" :class="{ last: isLast }" @contextmenu.prevent="handleContextMenu">
+  <li class="transfer-container" :class="{ last: isLast }" @contextmenu="handleContextMenu">
     <div class="transfer transfer-paid-by" :style="'background-image: url(' + avatar + ')'">
       <span>{{ initials }}</span>
     </div>
@@ -14,8 +14,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
+// import { mapGetters } from 'vuex'
 import Transfer from '../models/Transfer'
 import User from '../models/User'
+import { Mutations, Actions } from '../constants'
 import { TransferType } from '../types/common'
 
 export default Vue.extend({
@@ -43,11 +45,47 @@ export default Vue.extend({
       if (transferType === TransferType.income) receiverOrPayer = receiver
       return receiverOrPayer !== undefined ? receiverOrPayer.avatar : ''
     }
+    // ...mapGetters(['showContextMenu'])
   },
   methods: {
-    handleContextMenu(e: any) {
-      console.log(e)
-      console.log('delete?', this.transfer.id)
+    handleContextMenu(e: MouseEvent) {
+      const transferOwner =
+        this.transfer.transferType === TransferType.income
+          ? this.transfer.receiver!.uid
+          : this.transfer.paidBy!.uid
+      if (this.$store.state.user.uid !== transferOwner) {
+        // Only allow edit/delete on user's own transfers
+        return false
+      }
+      e.preventDefault()
+      let menu = {
+        title: this.transfer.message,
+        x: e.clientX,
+        y: e.clientY,
+        items: [
+          {
+            text: 'Edit transfer',
+            action: () => {
+              const id = this.transfer.id
+              alert('Sorry, editing has not been implemented yet')
+              this.$store.dispatch(Actions.EDIT_TRANSFER, this.transfer)
+              this.$store.commit(Mutations.HIDE_CONTEXT_MENU)
+            }
+          },
+          {
+            text: 'Delete',
+            action: () => {
+              const id = this.transfer.id
+              let doDelete = confirm(`Are you sure you want to delete '${this.transfer.message}'?`)
+              if (doDelete) {
+                this.$store.dispatch(Actions.DELETE_TRANSFER, id)
+              }
+              this.$store.commit(Mutations.HIDE_CONTEXT_MENU)
+            }
+          }
+        ]
+      }
+      this.$store.commit(Mutations.SHOW_CONTEXT_MENU, menu)
     }
   }
 })

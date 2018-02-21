@@ -12,6 +12,8 @@ export default {
 
 <style lang="scss">
 @import './styles/_colors.scss';
+@import './styles/_mixins.scss';
+@import './styles/_transitions.scss';
 
 html,
 body {
@@ -39,22 +41,6 @@ body {
 }
 
 /* Buttons and forms */
-@mixin btn-standard {
-  margin: auto;
-  padding: 1em 2em;
-  font-weight: bold;
-  transition: all 300ms ease-in-out;
-  color: $gold;
-  border: 3px solid $gold;
-}
-@mixin btn-semi {
-  color: darken($gold, 25%);
-  background: lighten($gold, 35%);
-}
-@mixin btn-solid {
-  background: $gold;
-  color: #fff;
-}
 .button {
   display: inline-block;
   cursor: pointer;
@@ -122,53 +108,5 @@ body {
 :-moz-placeholder {
   /* Firefox 18- */
   color: $gold;
-}
-
-/* transitions */
-.fade-in-up {
-  &-enter {
-    opacity: 0;
-    transform: translateY(2em);
-  }
-  &-enter-to {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-  &-enter-active,
-  &-leave-active {
-    transition: all 0.5s ease-in-out;
-  }
-  &-leave {
-    opacity: 1;
-    transform: scale(1, 1);
-  }
-  &-leave-to {
-    opacity: 0;
-    transform: scale(0.1, 0.1);
-  }
-}
-.fade-in-left {
-  &-enter {
-    opacity: 0;
-    transform: translateX(2em);
-    background-color: #ffc708;
-  }
-  &-enter-to {
-    opacity: 1;
-    transform: translateX(0px);
-    background-color: #fff;
-  }
-  &-enter-active,
-  &-leave-active {
-    transition: all 0.5s ease-in-out;
-  }
-  &-leave {
-    opacity: 1;
-    transform: translateX(0px);
-  }
-  &-leave-to {
-    opacity: 0;
-    transform: translateX(-50em);
-  }
 }
 </style>

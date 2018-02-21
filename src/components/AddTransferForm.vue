@@ -31,6 +31,11 @@
       </div>
     </transition>
     <transition name="fade-in-up">
+      <div v-if="transferType !== -1 && amount > 0" class="form-group">
+        <input type="date" class="bordered" :value="inputDate" @change="setInputDate" placeholder="Transfer date">
+      </div>
+    </transition>
+    <transition name="fade-in-up">
       <div v-if="transferType === 2 && amount > 0 && message !== ''" class="form-group">
         <select class="bordered" v-model="receiver">
           <option disabled value="">Who received the money</option>
@@ -64,9 +69,15 @@ export default class AddTransferForm extends Vue {
   transferType = -1
   amount: number | string = ''
   message: string = ''
+  date: Date = new Date()
   receiver: string = ''
 
   /* Computed values (getters) */
+  get inputDate() {
+    const month = `${this.$data.date.getMonth() + 1}`.padStart(2, '0')
+    const date = `${this.$data.date.getDate()}`.padStart(2, '0')
+    return `${this.$data.date.getFullYear()}-${month}-${date}`
+  }
   get title() {
     switch (this.transferType) {
       case TransferType.income:
@@ -86,7 +97,7 @@ export default class AddTransferForm extends Vue {
   @Watch('transferType')
   onTransferTypeChange(newType: TransferType, oldType: TransferType) {
     this.$nextTick(function() {
-      let element = this.$refs.amount as HTMLInputElement
+      let element = <HTMLInputElement>this.$refs.amount
       if (element) element.focus()
     })
   }
@@ -99,11 +110,15 @@ export default class AddTransferForm extends Vue {
     }
   }
   /* Methods */
+  setInputDate(e: any) {
+    this.$data.date = new Date(e.target.value)
+  }
   resetForm() {
     this.$data.transferType = -1
     this.$data.amount = 0
     this.$data.message = ''
     this.$data.receiver = ''
+    this.$data.date = new Date()
   }
   validateForm() {
     if (this.$data.amount === 0) {
@@ -122,7 +137,7 @@ export default class AddTransferForm extends Vue {
   }
   addTransfer() {
     if (!this.validateForm()) return null
-    const date = new Date().toISOString()
+    const date = this.$data.date.toISOString()
     let paidBy: User | undefined = undefined
     let receiver: User | undefined = undefined
     switch (this.$data.transferType) {
@@ -233,6 +248,7 @@ export default class AddTransferForm extends Vue {
   select,
   input[type='text'],
   input[type='number'],
+  input[type='date'],
   input[type='submit'] {
     font-size: 1em;
     padding: 1em 2em;
@@ -245,6 +261,9 @@ export default class AddTransferForm extends Vue {
       color: darken($gold, 25%);
       background: lighten($gold, 35%);
     }
+  }
+  input[type='date'] {
+    font-size: 1.1em;
   }
   .bordered {
     border: 3px solid $gold;

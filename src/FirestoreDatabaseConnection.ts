@@ -307,9 +307,21 @@ class FirestoreDatabaseConnection {
             batch.set(docRef, serializedTransfer)
           }
         })
-        await batch.commit()
+        return batch.commit()
       } catch (error) {
         console.error(error)
+        return reject(error)
+      }
+    })
+  }
+
+  deleteTransfer = (transferId: string, projectId: string) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const projectsRef = await this.getCollectionRef(Collections.PROJECTS)
+        const transfersRef = await projectsRef.doc(projectId).collection(Collections.TRANSFERS)
+        return resolve(transfersRef.doc(transferId).delete())
+      } catch (error) {
         return reject(error)
       }
     })

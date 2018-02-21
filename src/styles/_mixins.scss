@@ -1,0 +1,16 @@
+@mixin btn-standard {
+  margin: auto;
+  padding: 1em 2em;
+  font-weight: bold;
+  transition: all 300ms ease-in-out;
+  color: $gold;
+  border: 3px solid $gold;
+}
+@mixin btn-semi {
+  color: darken($gold, 25%);
+  background: lighten($gold, 35%);
+}
+@mixin btn-solid {
+  background: $gold;
+  color: #fff;
+}

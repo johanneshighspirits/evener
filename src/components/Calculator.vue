@@ -42,7 +42,7 @@ export default class Calculator extends Vue {
      */
     let balances: { [key: string]: { balance: number; name: string } } = {}
     if (this.transfers && this.transfers.length > 0) {
-      let transfers = Object.values(this.transfers) as Transfer[]
+      let transfers = <Transfer[]>Object.values(this.transfers)
       // var to hold all users while we calculate their balances
       // Actual count of users (2 == 2 users)
       let users = Object.values(this.users) as User[]

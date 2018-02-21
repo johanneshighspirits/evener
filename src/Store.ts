@@ -17,8 +17,10 @@ export interface State {
   inviteTimedOut: boolean
   displayInviteHelp: boolean
   inviteStatus: number
-  showLoginForm: boolean
   inviteIsValid: boolean
+  showLoginForm: boolean
+  showContextMenu: boolean
+  menu: object
 }
 
 const state: State = {
@@ -31,7 +33,9 @@ const state: State = {
   inviteLink: '',
   inviteStatus: 0,
   showLoginForm: false,
-  inviteIsValid: false
+  showContextMenu: false,
+  inviteIsValid: false,
+  menu: {}
 }
 
 const mutations: MutationTree<State> = {
@@ -88,6 +92,15 @@ const mutations: MutationTree<State> = {
   /* Notifications */
   [Mutations.DISPLAY_NOTIFICATION]: (state, message) => {
     console.log('[NOTIFICATION]', message)
+  },
+  /* Context Menu */
+  [Mutations.SHOW_CONTEXT_MENU]: (state, menu) => {
+    state.showContextMenu = true
+    state.menu = menu
+  },
+  [Mutations.HIDE_CONTEXT_MENU]: (state, menu) => {
+    state.showContextMenu = false
+    state.menu = {}
   },
   /* Invitations */
   [Mutations.GENERATE_INVITE_LINK]: (state, inviteLink) => {
@@ -177,6 +190,27 @@ const actions: ActionTree<State, any> = {
       debugger
     }
   },
+  [Actions.EDIT_TRANSFER]: async ({ state, commit }, transfer) => {
+    console.log(transfer)
+    debugger
+    // try {
+    //   if (state.user === undefined) throw new Error('No User')
+    //   await db.addTransfer(transfer, state.projectId, state.user.uid)
+    //   commit(Mutations.DISPLAY_NOTIFICATION, 'Transfer added: -', transfer.message)
+    // } catch (error) {
+    //   commit(Mutations.DISPLAY_NOTIFICATION, error)
+    //   debugger
+    // }
+  },
+  [Actions.DELETE_TRANSFER]: async ({ state, commit }, transferId) => {
+    try {
+      await db.deleteTransfer(transferId, state.projectId)
+      commit(Mutations.DISPLAY_NOTIFICATION, 'Transfer deleted: -' + transferId)
+    } catch (error) {
+      commit(Mutations.DISPLAY_NOTIFICATION, error)
+      debugger
+    }
+  },
   /* Collaboration */
   /**
    * Register an invitation at firestore /invitations/{inviteId}
@@ -244,6 +278,12 @@ const getters: GetterTree<State, any> = {
   },
   users: state => {
     return state.projects[state.projectId].users
+  },
+  showContextMenu: state => {
+    return state.showContextMenu
+  },
+  menu: state => {
+    return state.menu
   }
 }
 

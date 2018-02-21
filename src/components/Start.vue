@@ -7,9 +7,12 @@
         <a class="button" @click="logout">Log out</a>
       </div>
     </header>
-    <main>
-      <Project :project="project"/>
+    <main :class="{blurred: showContextMenu}" class="blurrable">
+      <project :project="project"/>
     </main>
+    <transition name="fade-in-scale">
+      <context-menu v-if="showContextMenu" />
+    </transition>
   </div>
 </template>
 
@@ -17,6 +20,7 @@
 import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import Project from './Project.vue'
+import ContextMenu from './ContextMenu.vue'
 import { Actions, Mutations } from '../constants'
 import firebase from 'firebase'
 export default Vue.extend({
@@ -68,14 +72,20 @@ export default Vue.extend({
     }
   },
   components: {
-    Project
+    Project,
+    ContextMenu
   },
   computed: {
-    ...mapGetters(['project', 'user'])
+    ...mapGetters(['project', 'user', 'showContextMenu'])
   }
 })
 </script>
 
 <style lang="scss" scoped>
-
+.blurrable {
+  transition: filter 300ms ease-out;
+  &.blurred {
+    filter: blur(3px);
+  }
+}
 </style>
