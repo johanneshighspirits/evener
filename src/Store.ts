@@ -12,6 +12,7 @@ export interface State {
   user?: User
   projects: { [key: string]: Project }
   noUserProjects: boolean
+  showCreateProjectForm: boolean
   projectId: string
   inviteLink: string
   inviteTimedOut: boolean
@@ -27,6 +28,7 @@ const state: State = {
   user: undefined,
   projects: {},
   noUserProjects: false,
+  showCreateProjectForm: false,
   projectId: '',
   inviteTimedOut: false,
   displayInviteHelp: false,
@@ -133,20 +135,21 @@ const actions: ActionTree<State, any> = {
   [Actions.GET_USER_PROJECTS]: async ({ state, commit, dispatch }) => {
     try {
       if (state.user === undefined) throw new Error('No user')
-      let projects: object = await db.getProjects(state.user.uid)
-      console.warn('[TODO]: Check if any projects exists in Store.Actions.GET_USER_PROJECTS.')
-      commit(Mutations.LOAD_PROJECTS, projects)
-      console.log('Projects loaded', projects)
-      let projectId = state.user.currentProject || (await db.getUsersLastProjectId(state.user))
-      // let projectId = 'yGuXxTD9cdueFvHHOisB'
-      if (!projectId) {
-        console.log(
-          '[TODO:] Found no current project, select the first or show list of all users projects?'
-        )
-        projectId = Object.keys(projects)[0]
+      let projects: { [key: string]: Project } = await db.getProjects(state.user.uid)
+      if (Object.keys(projects).length === 0) {
+        state.noUserProjects = true
+      } else {
+        commit(Mutations.LOAD_PROJECTS, projects)
+        let projectId = state.user.currentProject || (await db.getUsersLastProjectId(state.user))
+        if (!projectId) {
+          console.log(
+            '[TODO:] Found no current project, select the first or show list of all users projects?'
+          )
+          projectId = Object.keys(projects)[0]
+        }
+        console.log('Opening project with id:', projectId)
+        dispatch(Actions.OPEN_PROJECT, projectId)
       }
-      console.log('Opening project with id:', projectId)
-      dispatch(Actions.OPEN_PROJECT, projectId)
     } catch (error) {
       commit(Mutations.NO_PROJECTS_FOUND)
       debugger
@@ -170,11 +173,22 @@ const actions: ActionTree<State, any> = {
       debugger
     }
   },
+  [Actions.ADD_PROJECT]: async ({ state, commit, dispatch }, title) => {
+    try {
+      if (state.user === undefined) throw new Error('No User')
+      const newProjectId = await db.addProject(title, state.user)
+      dispatch(Actions.GET_USER_PROJECTS)
+      commit(Mutations.DISPLAY_NOTIFICATION, 'Project added: - ' + title + '. Opening...')
+    } catch (error) {
+      debugger
+      commit(Mutations.DISPLAY_NOTIFICATION, error)
+    }
+  },
   [Actions.ADD_TRANSFER]: async ({ state, commit }, transfer) => {
     try {
       if (state.user === undefined) throw new Error('No User')
       await db.addTransfer(transfer, state.projectId, state.user.uid)
-      commit(Mutations.DISPLAY_NOTIFICATION, 'Transfer added: -', transfer.message)
+      commit(Mutations.DISPLAY_NOTIFICATION, 'Transfer added: - ' + transfer.message)
     } catch (error) {
       commit(Mutations.DISPLAY_NOTIFICATION, error)
       debugger
@@ -196,7 +210,7 @@ const actions: ActionTree<State, any> = {
     // try {
     //   if (state.user === undefined) throw new Error('No User')
     //   await db.addTransfer(transfer, state.projectId, state.user.uid)
-    //   commit(Mutations.DISPLAY_NOTIFICATION, 'Transfer added: -', transfer.message)
+    //   commit(Mutations.DISPLAY_NOTIFICATION, 'Transfer added: - ' + transfer.message)
     // } catch (error) {
     //   commit(Mutations.DISPLAY_NOTIFICATION, error)
     //   debugger
@@ -269,6 +283,9 @@ const actions: ActionTree<State, any> = {
 const getters: GetterTree<State, any> = {
   project: state => {
     return state.projects[state.projectId]
+  },
+  projects: state => {
+    return state.projects
   },
   transfers: state => {
     return state.projects[state.projectId].transfers

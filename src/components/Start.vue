@@ -2,10 +2,16 @@
   <div>
     <header>
       <h1>Evener</h1>
-      <div v-if="user">
-        <p>Logged in as <br><b>{{ user.name() }}</b><br>{{ user.email }}</p>
-        <a class="button" @click="logout">Log out</a>
-      </div>
+      <transition name="fade-in-up">
+        <div v-if="user && showUserInfo" class="user-info open">
+          <p @click="showUserInfo = !showUserInfo" class="closer">x</p>
+          <p>Logged in as <br><b>{{ user.name() }}</b><br>{{ user.email }}</p>
+          <a class="button" @click="logout">Log out</a>
+        </div>
+        <div v-else-if="user" class="user-info closed" @click="showUserInfo = !showUserInfo">
+          <img :src="user.avatar" />
+        </div>
+      </transition>
     </header>
     <main :class="{blurred: showContextMenu}" class="blurrable">
       <project :project="project"/>
@@ -25,6 +31,11 @@ import { Actions, Mutations } from '../constants'
 import firebase from 'firebase'
 export default Vue.extend({
   name: 'start',
+  data() {
+    return {
+      showUserInfo: false
+    }
+  },
   created() {
     console.log('[START]', this.$route)
     firebase.auth().onAuthStateChanged(user => {
@@ -86,6 +97,26 @@ export default Vue.extend({
   transition: filter 300ms ease-out;
   &.blurred {
     filter: blur(3px);
+  }
+}
+.user-info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  &.closed {
+    img {
+      cursor: pointer;
+      margin: 28px;
+      display: block;
+      width: 28px;
+      border-radius: 50%;
+    }
+  }
+  .closer {
+    text-align: right;
+    cursor: pointer;
+    padding: 0 10px 5px;
   }
 }
 </style>

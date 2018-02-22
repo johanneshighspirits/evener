@@ -60,6 +60,29 @@ class FirestoreDatabaseConnection {
     return firebase.firestore().collection(collection)
   }
 
+  /**
+   * Create new project
+   * @param {string} title - The Project name
+   * @param {User} user - The current user
+   * @returns {string} - The newly created project's id
+   */
+  addProject = (title: string, user: User): Promise<string> => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const projectsRef = await this.getCollectionRef(Collections.PROJECTS)
+        const projectRef = await projectsRef.add({
+          title,
+          users: {
+            [user.uid]: true
+          }
+        })
+        return resolve(projectRef.id)
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
   getProjects = (uid: string): Promise<{ [key: string]: Project }> => {
     return new Promise(async (resolve, reject) => {
       try {
@@ -128,15 +151,15 @@ class FirestoreDatabaseConnection {
                 // console.log('LOCAL CHANGE ONLY')
                 switch (change.type) {
                   case 'added':
-                    console.log(`Adding transfer ${transfer.date} to currentProject`)
+                    // console.log(`Adding transfer ${transfer.date} to currentProject`)
                     this.store.commit(Mutations.ADD_TRANSFER, transfer)
                     break
                   case 'modified':
-                    console.log('Edit transfer')
+                    // console.log('Edit transfer')
                     this.store.commit(Mutations.EDIT_TRANSFER, transfer)
                     break
                   case 'removed':
-                    console.log('Remove transfer from currentProject')
+                    // console.log('Remove transfer from currentProject')
                     this.store.commit(Mutations.DELETE_TRANSFER, transfer)
                     break
                 }
@@ -144,15 +167,15 @@ class FirestoreDatabaseConnection {
                 // console.log('INCOMING CHANGE - UPDATE UI!!!')
                 switch (change.type) {
                   case 'added':
-                    console.log(`Adding transfer ${transfer.date} to currentProject`)
+                    // console.log(`Adding transfer ${transfer.date} to currentProject`)
                     this.store.commit(Mutations.ADD_TRANSFER, transfer)
                     break
                   case 'modified':
-                    console.log('Edit transfer')
+                    // console.log('Edit transfer')
                     this.store.commit(Mutations.EDIT_TRANSFER, transfer)
                     break
                   case 'removed':
-                    console.log('Remove transfer from currentProject')
+                    // console.log('Remove transfer from currentProject')
                     this.store.commit(Mutations.DELETE_TRANSFER, transfer)
                     break
                 }

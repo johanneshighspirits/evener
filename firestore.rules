@@ -1,8 +1,9 @@
 service cloud.firestore {
   match /databases/{database}/documents {
     match /projects/{projectId} {
+      // Allow signed in users to create new project
+      allow create: if request.auth.uid != null;
     	// Allow access to project if requester uid is in users list
-      allow create: if resource.data.users[request.auth.uid] == true;
       allow read, update, delete: if resource.data.users[request.auth.uid] == true
       || resource.data.invitedUsers[request.auth.token.email] == true;
       match /transfers/{transfer=**} {
