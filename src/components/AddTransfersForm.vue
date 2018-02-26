@@ -1,43 +1,15 @@
 <template>
   <form @submit.prevent="addTransfer" class="add-transfer-form form">
-    <h3>Register a payment</h3>
-    <h4>{{ title }}</h4>
-    <div class="form-group select-transfer-type">
-      <input id="payment" type="radio" value="1" v-model.number="transferType" >
-      <label for="payment" class="button bordered">Payment</label>
-      <input id="income" type="radio" value="0" v-model.number="transferType" >
-      <label for="income" class="button bordered">Income</label>
-      <input id="repayment" type="radio" value="2" v-model.number="transferType" >
-      <label for="repayment" class="button bordered">Repayment</label>
+    <h2>Add transfers</h2>
+    <div class="form-group import-transfers">
+      <label for="file" class="button bordered" style="margin-bottom:4px;">
+        Import JSON from file
+        <input id="file" type="file" @change="handleFileSelect">
+      </label>
+      <label class="button bordered" @click="exportTransfers">
+        Export transfers as JSON file
+      </label>
     </div>
-    <transition name="fade-in-up">
-      <div v-if="transferType !== -1" class="form-group">
-        <input type="number" class="bordered" min="0" step=".01" v-model.number="amount" ref="amount" placeholder="Amount">
-      </div>
-    </transition>
-    <transition name="fade-in-up">
-      <div v-if="transferType !== -1 && amount > 0" class="form-group">
-        <input type="text" class="bordered" v-model="message" placeholder="Description">
-      </div>
-    </transition>
-    <transition name="fade-in-up">
-      <div v-if="transferType !== -1 && amount > 0" class="form-group">
-        <input type="date" class="bordered" :value="inputDate" @change="setInputDate" placeholder="Transfer date">
-      </div>
-    </transition>
-    <transition name="fade-in-up">
-      <div v-if="transferType === 2 && amount > 0 && message !== ''" class="form-group">
-        <select class="bordered" v-model="receiver">
-          <option disabled value="">Who received the money</option>
-          <option v-for="(user, i) in users" :key="i" :value="user.uid">{{ user.name() }}</option>
-        </select>
-      </div>
-    </transition>
-    <transition name="fade-in-up">
-      <div v-if="amount > 0 && message !== '' && (transferType === 0 || transferType === 1 || (transferType === 2 && receiver !== ''))" class="form-group">
-        <input type="submit" class="bordered" value="SAVE"/>
-      </div>
-    </transition>
   </form>
 </template>
 
@@ -54,7 +26,7 @@ interface HTMLInputEvent extends Event {
 }
 
 @Component
-export default class AddTransferForm extends Vue {
+export default class AddTransfersForm extends Vue {
   /* data */
   transferType = -1
   amount: number | string = ''

@@ -109,4 +109,15 @@ body {
   /* Firefox 18- */
   color: $gold;
 }
+.closer {
+  text-align: right;
+  cursor: pointer;
+  padding: 0 10px 5px;
+}
+.blurrable {
+  transition: filter 300ms ease-out;
+  &.blurred {
+    filter: blur(3px);
+  }
+}
 </style>

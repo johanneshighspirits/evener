@@ -93,12 +93,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.blurrable {
-  transition: filter 300ms ease-out;
-  &.blurred {
-    filter: blur(3px);
-  }
-}
 .user-info {
   position: absolute;
   top: 0;
@@ -112,11 +106,6 @@ export default Vue.extend({
       width: 28px;
       border-radius: 50%;
     }
-  }
-  .closer {
-    text-align: right;
-    cursor: pointer;
-    padding: 0 10px 5px;
   }
 }
 </style>
