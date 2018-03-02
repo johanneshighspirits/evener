@@ -38,3 +38,8 @@ export interface Invitation {
   projectId: string
   projectName: string
 }
+
+export interface Debt {
+  amount: number
+  receiver: User
+}

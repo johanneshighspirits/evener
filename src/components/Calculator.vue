@@ -7,6 +7,9 @@
           <h5>{{ balance.name }}</h5>
           <div class="debt-result" :class="{ green: balance.balance >= 0, red: balance.balance < 0 }">
             <p>{{ balance.balance.toFixed(2) }}</p>
+            <div class="debts" v-for="(debt, i) in balance.debts" :key="i">
+              <p class="debt">{{debt.amount.toFixed(2)}}<span class="arrow">&rArr;</span>{{debt.receiver.name()}}</p>
+            </div>
           </div>
         </div>
       </ul>
@@ -20,7 +23,7 @@ import { Component, Prop } from 'vue-property-decorator'
 // import { Actions } from '../constants'
 import Transfer from '../models/Transfer'
 import User from '../models/User'
-import { TransferType } from '../types/common'
+import { TransferType, Debt } from '../types/common'
 // import { TransferType, LegacyTransfer } from '../types/common'
 
 @Component
@@ -40,19 +43,23 @@ export default class Calculator extends Vue {
     /**
      * Map transfers to users
      */
-    let balances: { [key: string]: { balance: number; name: string } } = {}
+    let balances: {
+      [key: string]: { balance: number; name: string; email: string; debts: Debt[] }
+    } = {}
     if (this.transfers && this.transfers.length > 0) {
       let transfers = <Transfer[]>Object.values(this.transfers)
       // var to hold all users while we calculate their balances
-      // Actual count of users (2 == 2 users)
       let users = Object.values(this.users) as User[]
+      // Actual count of users (2 == 2 users)
       let userCount = users.length
       users.forEach((user: User) => {
         const userId = user.uid
         // Init user balance
         balances[userId] = {
           name: user.name(),
-          balance: 0
+          email: user.email,
+          balance: 0,
+          debts: []
         }
         // Loop transfers
         transfers.forEach(transfer => {
@@ -67,7 +74,7 @@ export default class Calculator extends Vue {
               // Who got the income?
               if (transfer.receiver && transfer.receiver.uid === userId) {
                 // User got income, decrease user (receiver) balance
-                balances[userId].balance -= transfer.amount / userCount
+                balances[userId].balance -= transfer.amount / userCount * (userCount - 1)
               } else {
                 // Someone else got income, increase user balance
                 balances[userId].balance += transfer.amount / userCount
@@ -77,7 +84,7 @@ export default class Calculator extends Vue {
               // Who made the payment?
               if (transfer.paidBy && transfer.paidBy.uid === userId) {
                 // User made the payment, increase user balance
-                balances[userId].balance += transfer.amount / userCount
+                balances[userId].balance += transfer.amount / userCount * (userCount - 1)
               } else {
                 // Someone else made the payment, decrease user balance
                 balances[userId].balance -= transfer.amount / userCount
@@ -88,15 +95,40 @@ export default class Calculator extends Vue {
               if (transfer.paidBy && transfer.paidBy.uid === userId) {
                 // User made repayment
                 balances[userId].balance += transfer.amount
-              } else if (transfer.receiver && transfer.receiver.uid === userId) {
+              }
+              if (transfer.receiver && transfer.receiver.uid === userId) {
                 // User received repayment
                 balances[userId].balance -= transfer.amount
-              } else {
-                // Someone else made a repayment to someone else, do nothing
               }
               break
           }
         })
+      })
+      // Calculate debts
+      users.forEach(user => {
+        const balance = balances[user.uid]
+        if (balance.balance < 0) {
+          let leftToPay = balance.balance
+          let i = users.length - 1
+          while (leftToPay < 0 && i >= 0) {
+            const receiver = users[i]
+            const receiverBalance = balances[receiver.uid]
+            if (receiverBalance.balance > 0) {
+              // Receiver should get money
+              const amount =
+                leftToPay * -1 >= receiverBalance.balance ? receiverBalance.balance : leftToPay * -1
+              leftToPay += amount
+              let debt = {
+                amount,
+                receiver
+              }
+              balance.debts.push(debt)
+            } else {
+              // Ignore receiver who shall pay
+            }
+            i -= 1
+          }
+        }
       })
     }
     return balances
@@ -126,6 +158,17 @@ $red: rgb(223, 121, 121);
       @media screen and (min-width: 400px) {
         font-size: 2em;
         padding: 0.2em;
+      }
+      .debts {
+        font-size: 0.5em;
+        .debt {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          span.arrow {
+            padding: 0 1em;
+          }
+        }
       }
     }
     .green {

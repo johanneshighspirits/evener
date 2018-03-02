@@ -22,6 +22,7 @@ export interface State {
   showLoginForm: boolean
   showContextMenu: boolean
   menu: object
+  menuSelection: number
 }
 
 const state: State = {
@@ -37,7 +38,8 @@ const state: State = {
   showLoginForm: false,
   showContextMenu: false,
   inviteIsValid: false,
-  menu: {}
+  menu: {},
+  menuSelection: -1
 }
 
 const mutations: MutationTree<State> = {
@@ -94,6 +96,10 @@ const mutations: MutationTree<State> = {
   /* Notifications */
   [Mutations.DISPLAY_NOTIFICATION]: (state, message) => {
     console.log('[NOTIFICATION]', message)
+  },
+  /* Menu */
+  [Mutations.SELECT_MENU]: (state, item) => {
+    state.menuSelection = item
   },
   /* Context Menu */
   [Mutations.SHOW_CONTEXT_MENU]: (state, menu) => {
@@ -177,8 +183,13 @@ const actions: ActionTree<State, any> = {
     try {
       if (state.user === undefined) throw new Error('No User')
       const newProjectId = await db.addProject(title, state.user)
+      state.user.currentProject = newProjectId
       dispatch(Actions.GET_USER_PROJECTS)
-      commit(Mutations.DISPLAY_NOTIFICATION, 'Project added: - ' + title + '. Opening...')
+      commit(Mutations.SELECT_MENU, -1)
+      commit(
+        Mutations.DISPLAY_NOTIFICATION,
+        'Project added: - ' + title + '. Opening...' + newProjectId
+      )
     } catch (error) {
       debugger
       commit(Mutations.DISPLAY_NOTIFICATION, error)
@@ -188,6 +199,7 @@ const actions: ActionTree<State, any> = {
     try {
       if (state.user === undefined) throw new Error('No User')
       await db.addTransfer(transfer, state.projectId, state.user.uid)
+      commit(Mutations.SELECT_MENU, -1)
       commit(Mutations.DISPLAY_NOTIFICATION, 'Transfer added: - ' + transfer.message)
     } catch (error) {
       commit(Mutations.DISPLAY_NOTIFICATION, error)
@@ -198,6 +210,7 @@ const actions: ActionTree<State, any> = {
     try {
       if (state.user === undefined) throw new Error('No User')
       await db.addTransfers(transfers, state.projects[state.projectId], state.user.uid)
+      commit(Mutations.SELECT_MENU, -1)
       commit(Mutations.DISPLAY_NOTIFICATION, 'Transfer added: - ' + transfers.message)
     } catch (error) {
       commit(Mutations.DISPLAY_NOTIFICATION, error)

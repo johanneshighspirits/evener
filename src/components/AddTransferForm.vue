@@ -29,7 +29,7 @@
       <div v-if="transferType === 2 && amount > 0 && message !== ''" class="form-group">
         <select class="bordered" v-model="receiver">
           <option disabled value="">Who received the money</option>
-          <option v-for="(user, i) in users" :key="i" :value="user.uid">{{ user.name() }}</option>
+          <option v-for="(user, i) in users" v-if="user.uid !== currentUser.uid" :key="i" :value="user.uid">{{ user.name() }} {{ user.email }}</option>
         </select>
       </div>
     </transition>
@@ -79,6 +79,9 @@ export default class AddTransferForm extends Vue {
       default:
         return 'Please, select an option below'
     }
+  }
+  get currentUser() {
+    return this.$store.getters.user
   }
   get users() {
     return this.$store.getters.users

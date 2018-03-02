@@ -76,6 +76,8 @@ class FirestoreDatabaseConnection {
             [user.uid]: true
           }
         })
+        // Open new project
+        await this.storeUsersLastSetListId(user, projectRef.id)
         return resolve(projectRef.id)
       } catch (error) {
         return reject(error)
@@ -419,13 +421,35 @@ class FirestoreDatabaseConnection {
         const invitationsRef = await this.getCollectionRef(Collections.INVITATIONS)
         const invitationDoc = await invitationsRef.doc(inviteId).get()
         const invitation = invitationDoc.data() as Invitation
-        let user = firebase.auth().currentUser
-        if (!user) {
-          throw new Error('Can not validate invite if user is not logged in')
+        let firebaseUser = firebase.auth().currentUser
+        if (!firebaseUser) {
+          throw new Error('Can not validate invite if firebaseUser is not logged in')
         } else {
-          if (user.email === invitation.invited) {
-            // User is valid, add user uid to project.users
-            const accepted = await this.acceptInvite(invitation, inviteId, user.uid)
+          if (firebaseUser.email === invitation.invited) {
+            // firebaseUser is valid, add user uid to project.users
+            let token = await firebaseUser.getIdToken()
+            let name = firebaseUser.displayName
+            let email = firebaseUser.email
+            let avatar = firebaseUser.photoURL
+            if (!email || !name || !avatar) {
+              firebaseUser.providerData.forEach(function(profile) {
+                if (profile && profile.providerId.includes('google')) {
+                  if (!email) email = profile.email || ''
+                  if (!avatar) avatar = profile.photoURL
+                  if (!name) name = profile.displayName
+                }
+              })
+            }
+            let userInfo: UserInfo = {
+              uid: firebaseUser.uid,
+              name: name || '',
+              avatar: avatar || '',
+              email: email || '',
+              currentProject: invitation.projectId
+            }
+
+            let user = await this.getOrCreateUser(userInfo)
+            const accepted = await this.acceptInvite(invitation, inviteId, user)
             if (!accepted)
               throw new Error(
                 'User is valid but something went wrong when trying to unlock project.'
@@ -443,7 +467,7 @@ class FirestoreDatabaseConnection {
     })
   }
 
-  acceptInvite = (invitation: Invitation, inviteId: string, uid: string): Promise<boolean> => {
+  acceptInvite = (invitation: Invitation, inviteId: string, user: User): Promise<boolean> => {
     return new Promise(async (resolve, reject) => {
       try {
         const projectsRef = await this.getCollectionRef(Collections.PROJECTS)
@@ -455,7 +479,7 @@ class FirestoreDatabaseConnection {
               [`${invitation.invited}`]: firebase.firestore.FieldValue.delete()
             },
             users: {
-              [`${uid}`]: true
+              [`${user.uid}`]: true
             }
           },
           { merge: true }
@@ -463,6 +487,8 @@ class FirestoreDatabaseConnection {
         // Remove invitation
         const invitationsRef = await this.getCollectionRef(Collections.INVITATIONS)
         await invitationsRef.doc(inviteId).delete()
+        // Set currentProject
+        this.storeUsersLastSetListId(user, invitation.projectId)
         // Success
         return resolve(true)
       } catch (error) {

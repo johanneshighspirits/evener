@@ -44,13 +44,13 @@ import AddTransfersForm from './AddTransfersForm.vue'
 import CreateProjectForm from './CreateProjectForm.vue'
 import InviteCollaboratorForm from './InviteCollaboratorForm.vue'
 import { Project } from '../types/common'
+import { Mutations } from '../constants'
 export default Vue.extend({
   name: 'project',
   data() {
     return {
       showMenu: false,
-      menuSelection: -1,
-      menuItems: ['Add Transfer', 'Add Transfers', 'Share Project', 'Create Project']
+      menuItems: ['Add Transfer', 'Add Transfers', 'Share Project', 'Open/Create Project']
     }
   },
   components: {
@@ -67,14 +67,19 @@ export default Vue.extend({
     },
     project(): Project {
       return this.$store.getters.project
+    },
+    menuSelection(): number {
+      return this.$store.state.menuSelection
     }
   },
   methods: {
     selectMenuItem(item: number) {
       if (this.menuSelection === item) {
-        this.menuSelection = -1
+        this.$store.commit(Mutations.SELECT_MENU, -1)
+        // this.menuSelection = -1
       } else {
-        this.menuSelection = item
+        this.$store.commit(Mutations.SELECT_MENU, item)
+        // this.menuSelection = item
       }
       this.showMenu = false
     }

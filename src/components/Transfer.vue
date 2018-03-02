@@ -21,7 +21,7 @@ import { Mutations, Actions } from '../constants'
 import { TransferType } from '../types/common'
 
 export default Vue.extend({
-  name: 'transfer',
+  name : 'transfer',
   props: {
     transfer: {
       type: Transfer,
