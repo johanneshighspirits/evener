@@ -97,7 +97,10 @@ export default Vue.extend({
   position: absolute;
   top: 0;
   right: 0;
-  padding: 0 1em;
+  padding: 0 1em 1em;
+  &.open {
+    background-color: #fff;
+  }
   &.closed {
     img {
       cursor: pointer;

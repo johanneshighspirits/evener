@@ -3,7 +3,7 @@
     <section v-if="transfers.length > 0">
       <h4>Balance</h4>
       <ul class="debt-boxes-container">
-        <div v-for="(balance, i) in balances" class="debt-box" :key="i">
+        <li v-for="(balance, i) in balances" class="debt-box" :key="i">
           <h5>{{ balance.name }}</h5>
           <div class="debt-result" :class="{ green: balance.balance >= 0, red: balance.balance < 0 }">
             <p>{{ balance.balance.toFixed(2) }}</p>
@@ -11,7 +11,7 @@
               <p class="debt">{{debt.amount.toFixed(2)}}<span class="arrow">&rArr;</span>{{debt.receiver.name()}}</p>
             </div>
           </div>
-        </div>
+        </li>
       </ul>
     </section>
     </transition>
@@ -148,6 +148,12 @@ $red: rgb(223, 121, 121);
   }
   margin: 2px;
   padding: 0;
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
   .debt-box {
     flex-grow: 1;
     margin: 1px;
@@ -165,8 +171,12 @@ $red: rgb(223, 121, 121);
           display: flex;
           flex-direction: row;
           justify-content: center;
+          align-items: center;
+          line-height: 1em;
           span.arrow {
-            padding: 0 1em;
+            line-height: 1em;
+            padding-left: 1em;
+            padding-right: 1em;
           }
         }
       }

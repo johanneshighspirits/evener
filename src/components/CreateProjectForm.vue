@@ -1,12 +1,6 @@
 <template>
-  <transition-group name="fade-in-up">
-    <div :key="'controls'">
-      <div class="form-group">
-        <button v-if="!showCreateForm && !showOpenProject" class="button toggleCreateProjectForm" @click="toggleCreateProjectForm">Create new Project</button>
-        <button v-if="!showCreateForm && !showOpenProject && projects.length > 1" class="button toggleOpenProject" @click="toggleOpenProject">Open Project...</button>
-      </div>
-    </div>
-    <form v-if="showCreateForm" @submit.prevent="addProject" :key="'addProject'" class="create-project-form form">
+  <transition name="fade-in-up">
+    <form @submit.prevent="addProject" :key="'addProject'" class="create-project-form form">
       <h2>Create new Evener Project</h2>
       <p>Choose a name for your Project</p>
       <transition name="fade-in-up">
@@ -14,25 +8,13 @@
           <input type="text" class="bordered" v-model="title" autofocus placeholder="Project title">
         </div>
       </transition>
-      <!-- <transition name="fade-in-up">
-        <div v-if="transferType !== -1 && amount > 0" class="form-group">
-          <input type="date" class="bordered" :value="inputDate" @change="setInputDate" placeholder="Transfer date">
-        </div>
-      </transition> -->
       <transition name="fade-in-up">
         <div v-if="title !== ''" class="form-group">
           <input type="submit" class="bordered" value="ADD PROJECT"/>
         </div>
       </transition>
     </form>
-    <div v-if="showOpenProject" :key="'openProject'">
-      <h2>Projects</h2>
-      <p>Click a project to open</p>
-      <div>
-        <button class="button" v-for="project in projects" v-if="project.id !== currentProject.id" @click="openProject" :id="project.id" :key="project.id">{{ project.title }}</button>
-      </div>
-    </div>
-  </transition-group>
+  </transition>
 </template>
 
 <script lang="ts">
@@ -75,33 +57,10 @@ export default class CreateProjectForm extends Vue {
   get currentProject() {
     return this.$store.getters.project
   }
-  // /* Watchers */
-  // @Watch('transferType')
-  // onTransferTypeChange(newType: TransferType, oldType: TransferType) {
-  //   this.$nextTick(function() {
-  //     let element = <HTMLInputElement>this.$refs.amount
-  //     if (element) element.focus()
-  //   })
-  // }
-  // @Watch('amount')
-  // onAmountChange(newAmount: number | string, oldAmount: number | string) {
-  //   if (newAmount === 0 || newAmount === '0') {
-  //     this.$nextTick(function() {
-  //       this.amount = ''
-  //     })
-  //   }
-  // }
   /* Methods */
-  // setInputDate(e: any) {
-  //   this.$data.date = new Date(e.target.value)
-  // }
   toggleCreateProjectForm() {
     this.$data.showCreateForm = !this.$data.showCreateForm
     this.$data.showOpenProject = false
-  }
-  toggleOpenProject() {
-    this.$data.showOpenProject = !this.$data.showOpenProject
-    this.$data.showCreateForm = false
   }
   resetForm() {
     this.$data.title = ''
@@ -131,10 +90,6 @@ export default class CreateProjectForm extends Vue {
     // const date = this.$data.date.toISOString()
     this.$store.dispatch(Actions.ADD_PROJECT, this.$data.title)
     this.resetForm()
-  }
-  openProject(e: HTMLButtonEvent) {
-    const projectId = e.target.id
-    this.$store.dispatch(Actions.OPEN_PROJECT, projectId)
   }
 }
 </script>

@@ -18,7 +18,8 @@
           <add-transfer-form v-if="menuSelection == 0"/>
           <add-transfers-form v-if="menuSelection == 1"/>
           <invite-collaborator-form v-else-if="menuSelection == 2"/>
-          <create-project-form v-else-if="menuSelection == 3" />
+          <open-project-form v-else-if="menuSelection == 3" />
+          <create-project-form v-else-if="menuSelection == 4" />
         </transition>
         <calculator/>
         <transfers/>
@@ -42,6 +43,7 @@ import Calculator from './Calculator.vue'
 import AddTransferForm from './AddTransferForm.vue'
 import AddTransfersForm from './AddTransfersForm.vue'
 import CreateProjectForm from './CreateProjectForm.vue'
+import OpenProjectForm from './OpenProjectForm.vue'
 import InviteCollaboratorForm from './InviteCollaboratorForm.vue'
 import { Project } from '../types/common'
 import { Mutations } from '../constants'
@@ -50,7 +52,13 @@ export default Vue.extend({
   data() {
     return {
       showMenu: false,
-      menuItems: ['Add Transfer', 'Add Transfers', 'Share Project', 'Open/Create Project']
+      menuItems: [
+        'Add Transfer',
+        'Add Transfers',
+        'Share Project',
+        'Open Project',
+        'Create Project'
+      ]
     }
   },
   components: {
@@ -59,6 +67,7 @@ export default Vue.extend({
     AddTransferForm,
     AddTransfersForm,
     CreateProjectForm,
+    OpenProjectForm,
     InviteCollaboratorForm
   },
   computed: {

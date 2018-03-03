@@ -6,7 +6,7 @@
         <Transfer v-for="(transfer, i) in transfers" :transfer="transfer" :is-last="i === transfers.length - 1" :key="transfer.id"/>
       </transition-group>
     </ul>
-    <p v-else>No transfers found</p>
+    <p v-else>Loading transactions...</p>
   </section>
 </template>
 
