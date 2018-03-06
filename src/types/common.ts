@@ -43,3 +43,9 @@ export interface Debt {
   amount: number
   receiver: User
 }
+
+export interface Notification {
+  id: string
+  title: string
+  message: string
+}

@@ -2,9 +2,10 @@ import Vue from 'vue'
 import Vuex, { MutationTree, ActionTree, GetterTree } from 'vuex'
 import FirestoreDatabaseConnection from './FirestoreDatabaseConnection'
 import { Actions, Mutations } from './constants'
-import { Project } from './types/common'
+import { Project, Notification } from './types/common'
 import User from './models/User'
 import Transfer from './models/Transfer'
+import uuidv1 from 'uuid/v1'
 
 Vue.use(Vuex)
 
@@ -12,7 +13,6 @@ export interface State {
   user?: User
   projects: { [key: string]: Project }
   noUserProjects: boolean
-  showCreateProjectForm: boolean
   projectId: string
   inviteLink: string
   inviteTimedOut: boolean
@@ -23,13 +23,13 @@ export interface State {
   showContextMenu: boolean
   menu: object
   menuSelection: number
+  notifications: Notification[]
 }
 
 const state: State = {
   user: undefined,
   projects: {},
   noUserProjects: false,
-  showCreateProjectForm: false,
   projectId: '',
   inviteTimedOut: false,
   displayInviteHelp: false,
@@ -39,7 +39,19 @@ const state: State = {
   showContextMenu: false,
   inviteIsValid: false,
   menu: {},
-  menuSelection: -1
+  menuSelection: -1,
+  notifications: [
+    {
+      id: 'test1',
+      title: 'Welcome',
+      message: 'Nice to see you again'
+    },
+    {
+      id: 'test2',
+      title: 'A later notification',
+      message: 'This was pushed later'
+    }
+  ]
 }
 
 const mutations: MutationTree<State> = {
@@ -94,8 +106,25 @@ const mutations: MutationTree<State> = {
     state.projects[state.projectId].transfers.splice(transferId, 1)
   },
   /* Notifications */
-  [Mutations.DISPLAY_NOTIFICATION]: (state, message) => {
-    console.log('[NOTIFICATION]', message)
+  [Mutations.DISPLAY_NOTIFICATION]: (state, notification) => {
+    console.log('[NOTIFICATION]', notification)
+    if (!notification.message) throw new Error('[NO MESSAGE:] ' + notification)
+    const id = uuidv1()
+    state.notifications.unshift({
+      id,
+      title: notification.title,
+      message: notification.message
+    })
+    setTimeout(() => {
+      state.notifications = state.notifications.filter(notification => {
+        return notification.id !== id
+      })
+    }, 5000)
+  },
+  [Mutations.CLOSE_NOTIFICATION]: (state, id) => {
+    state.notifications = state.notifications.filter(notification => {
+      return notification.id !== id
+    })
   },
   /* Menu */
   [Mutations.SELECT_MENU]: (state, item) => {
@@ -164,12 +193,8 @@ const actions: ActionTree<State, any> = {
   [Actions.OPEN_PROJECT]: async ({ state, commit }, projectId) => {
     try {
       let project = state.projects[projectId]
-      if (project.transfers.length === 0) {
-        // Watch transfers and users
-        db.watchProject(project)
-        // Load transfers and users
-        // await db.populateProject(project)
-      }
+      // Watch transfers and users
+      db.watchProject(project)
       // Make sure currentProjectId is updated
       if (state.user && state.user.currentProject !== projectId) {
         db.storeUsersLastSetListId(state.user, projectId)
@@ -186,13 +211,16 @@ const actions: ActionTree<State, any> = {
       state.user.currentProject = newProjectId
       dispatch(Actions.GET_USER_PROJECTS)
       commit(Mutations.SELECT_MENU, -1)
-      commit(
-        Mutations.DISPLAY_NOTIFICATION,
-        'Project added: - ' + title + '. Opening...' + newProjectId
-      )
+      commit(Mutations.DISPLAY_NOTIFICATION, {
+        title: `Project ${title} added`,
+        message: 'Opening...'
+      })
     } catch (error) {
       debugger
-      commit(Mutations.DISPLAY_NOTIFICATION, error)
+      commit(Mutations.DISPLAY_NOTIFICATION, {
+        title: 'ERROR',
+        message: error
+      })
     }
   },
   [Actions.ADD_TRANSFER]: async ({ state, commit }, transfer) => {
@@ -200,9 +228,15 @@ const actions: ActionTree<State, any> = {
       if (state.user === undefined) throw new Error('No User')
       await db.addTransfer(transfer, state.projectId, state.user.uid)
       commit(Mutations.SELECT_MENU, -1)
-      commit(Mutations.DISPLAY_NOTIFICATION, 'Transfer added: - ' + transfer.message)
+      commit(Mutations.DISPLAY_NOTIFICATION, {
+        title: 'Transfer added',
+        message: transfer.message
+      })
     } catch (error) {
-      commit(Mutations.DISPLAY_NOTIFICATION, error)
+      commit(Mutations.DISPLAY_NOTIFICATION, {
+        title: 'ERROR',
+        message: error
+      })
       debugger
     }
   },
@@ -211,9 +245,15 @@ const actions: ActionTree<State, any> = {
       if (state.user === undefined) throw new Error('No User')
       await db.addTransfers(transfers, state.projects[state.projectId], state.user.uid)
       commit(Mutations.SELECT_MENU, -1)
-      commit(Mutations.DISPLAY_NOTIFICATION, 'Transfer added: - ' + transfers.message)
+      commit(Mutations.DISPLAY_NOTIFICATION, {
+        title: 'Transfers added',
+        message: transfers.message
+      })
     } catch (error) {
-      commit(Mutations.DISPLAY_NOTIFICATION, error)
+      commit(Mutations.DISPLAY_NOTIFICATION, {
+        title: 'ERROR',
+        message: error
+      })
       debugger
     }
   },
@@ -232,9 +272,15 @@ const actions: ActionTree<State, any> = {
   [Actions.DELETE_TRANSFER]: async ({ state, commit }, transferId) => {
     try {
       await db.deleteTransfer(transferId, state.projectId)
-      commit(Mutations.DISPLAY_NOTIFICATION, 'Transfer deleted: -' + transferId)
+      commit(Mutations.DISPLAY_NOTIFICATION, {
+        title: 'Transfer deleted',
+        message: ''
+      })
     } catch (error) {
-      commit(Mutations.DISPLAY_NOTIFICATION, error)
+      commit(Mutations.DISPLAY_NOTIFICATION, {
+        title: 'ERROR',
+        message: error
+      })
       debugger
     }
   },
@@ -252,14 +298,17 @@ const actions: ActionTree<State, any> = {
         state.projects[state.projectId]
       )
       commit(Mutations.GENERATE_INVITE_LINK, `${window.location.origin}/invitations/${inviteId}`)
-      commit(
-        Mutations.DISPLAY_NOTIFICATION,
-        `${email} invited to ${state.projects[state.projectId].title}. ${
+      commit(Mutations.DISPLAY_NOTIFICATION, {
+        title: 'Invitation complete.',
+        message: `${email} invited to ${state.projects[state.projectId].title}. ${
           window.location.origin
         }/invitations/${inviteId}`
-      )
+      })
     } catch (error) {
-      commit(Mutations.DISPLAY_NOTIFICATION, error)
+      commit(Mutations.DISPLAY_NOTIFICATION, {
+        title: 'ERROR',
+        message: error
+      })
       debugger
     }
   },
@@ -271,23 +320,32 @@ const actions: ActionTree<State, any> = {
     try {
       const invite = await db.openInvite(inviteId)
       commit(Mutations.SHOW_LOGIN_FORM)
-      commit(
-        Mutations.DISPLAY_NOTIFICATION,
-        `${invite.invited} opened invite to ${invite.projectName}.`
-      )
+      commit(Mutations.DISPLAY_NOTIFICATION, {
+        title: `Finding invite`,
+        message: `${invite.invited} opened invite to ${invite.projectName}.`
+      })
     } catch (error) {
-      commit(Mutations.DISPLAY_NOTIFICATION, error)
+      commit(Mutations.DISPLAY_NOTIFICATION, {
+        title: 'ERROR',
+        message: error
+      })
       debugger
     }
   },
   [Actions.VALIDATE_PROJECT_INVITE]: async ({ state, commit }, inviteId) => {
     try {
       const isValid = await db.validateInvite(inviteId)
-      commit(Mutations.DISPLAY_NOTIFICATION, `Invite isValid: ${isValid}`)
+      commit(Mutations.DISPLAY_NOTIFICATION, {
+        title: `Invite isValid: ${isValid}`,
+        message: 'Opening project...'
+      })
       // Redirect to project (happens in Validate.vue when isValid switches to true)
       commit(Mutations.INVITE_IS_VALID, isValid)
     } catch (error) {
-      commit(Mutations.DISPLAY_NOTIFICATION, error)
+      commit(Mutations.DISPLAY_NOTIFICATION, {
+        title: 'ERROR',
+        message: error
+      })
       debugger
     }
   }

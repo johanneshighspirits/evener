@@ -1,12 +1,17 @@
 <template>
   <div id="app">
+    <notifications/>
     <router-view/>
   </div>
 </template>
 
 <script lang="ts">
+import Notifications from './components/Notifications.vue'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Notifications
+  }
 }
 </script>
 
@@ -23,6 +28,13 @@ body {
 }
 * {
   box-sizing: border-box;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 #app {

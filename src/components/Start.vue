@@ -1,7 +1,7 @@
 <template>
   <div>
     <header>
-      <h1>Evener</h1>
+      <h1 class="blurrable">Evener</h1>
       <transition name="fade-in-up">
         <div v-if="user && showUserInfo" class="user-info open">
           <p @click="showUserInfo = !showUserInfo" class="closer">x</p>

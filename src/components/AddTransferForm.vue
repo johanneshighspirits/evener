@@ -169,7 +169,9 @@ export default class AddTransferForm extends Vue {
         if (importedProject.projectId === projectId) {
           this.importTransfers(importedProject.transfers)
         } else {
-          this.$store.commit(Mutations.DISPLAY_NOTIFICATION, 'This is not the same project.')
+          this.$store.commit(Mutations.DISPLAY_NOTIFICATION, {
+            message: 'This is not the same project.'
+          })
         }
       }
       fileReader.readAsText(file, 'utf8')
