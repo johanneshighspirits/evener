@@ -1,12 +1,12 @@
 import { UserInfo } from '../types/common'
 
 class User {
-  uid: string
-  firstName: string
-  lastName: string
-  avatar: string
-  email: string
-  currentProject: string
+  public uid: string
+  public firstName: string
+  public lastName: string
+  public avatar: string
+  public email: string
+  public currentProject: string
 
   constructor(userInfo: UserInfo) {
     const { name, email, avatar, uid, currentProject } = userInfo
@@ -24,11 +24,11 @@ class User {
     this.currentProject = currentProject
   }
 
-  name = (): string => {
+  public name = (): string => {
     return `${this.firstName} ${this.lastName}`
   }
 
-  initials = (): string => {
+  public initials = (): string => {
     return `${this.firstName[0].toLocaleUpperCase()}${this.lastName[0].toLocaleUpperCase()}`
   }
 }

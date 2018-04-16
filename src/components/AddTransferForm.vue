@@ -29,7 +29,7 @@
       <div v-if="transferType === 2 && amount > 0 && message !== ''" class="form-group">
         <select class="bordered" v-model="receiver">
           <option disabled value="">Who received the money</option>
-          <option v-for="(user, i) in users" v-if="user.uid !== currentUser.uid" :key="i" :value="user.uid">{{ user.name() }} {{ user.email }}</option>
+          <option v-for="(user, i) in users" v-if="user.uid !== currentUser.uid" :key="i" :value="user.uid">{{ user.name() }}</option>
         </select>
       </div>
     </transition>
@@ -89,6 +89,9 @@ export default class AddTransferForm extends Vue {
   /* Watchers */
   @Watch('transferType')
   onTransferTypeChange(newType: TransferType, oldType: TransferType) {
+    if (this.receiver === '' && Object.keys(this.users).length === 2) {
+      this.receiver = Object.keys(this.users).find(uid => uid !== this.currentUser.uid) || ''
+    }
     this.$nextTick(function() {
       let element = <HTMLInputElement>this.$refs.amount
       if (element) element.focus()

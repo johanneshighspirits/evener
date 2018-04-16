@@ -21,7 +21,7 @@ declare module 'firebaseui' {
   }
   interface ISignInOption {
     provider: string
-    scopes?: Array<string>
+    scopes?: string[]
     requireDisplayName?: boolean
   }
 
@@ -32,7 +32,7 @@ declare module 'firebaseui' {
     }
     class AuthUI {
       constructor(auth: firebase.auth.Auth)
-      start(containerCSSselector: string, config: IConfig)
+      public start(containerCSSselector: string, config: IConfig)
     }
   }
 }

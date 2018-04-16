@@ -1,15 +1,15 @@
-import Vue from 'vue'
-import Vuex, { MutationTree, ActionTree, GetterTree } from 'vuex'
-import FirestoreDatabaseConnection from './FirestoreDatabaseConnection'
-import { Actions, Mutations } from './constants'
-import { Project, Notification } from './types/common'
-import User from './models/User'
-import Transfer from './models/Transfer'
 import uuidv1 from 'uuid/v1'
+import Vue from 'vue'
+import Vuex, { ActionTree, GetterTree, MutationTree } from 'vuex'
+import { Actions, Mutations } from './constants'
+import FirestoreDatabaseConnection from './FirestoreDatabaseConnection'
+import Transfer from './models/Transfer'
+import User from './models/User'
+import { Notification, Project } from './types/common'
 
 Vue.use(Vuex)
 
-export interface State {
+export interface IState {
   user?: User
   projects: { [key: string]: Project }
   noUserProjects: boolean
@@ -26,7 +26,7 @@ export interface State {
   notifications: Notification[]
 }
 
-const state: State = {
+const initialState: IState = {
   user: undefined,
   projects: {},
   noUserProjects: false,
@@ -40,21 +40,10 @@ const state: State = {
   inviteIsValid: false,
   menu: {},
   menuSelection: -1,
-  notifications: [
-    {
-      id: 'test1',
-      title: 'Welcome',
-      message: 'Nice to see you again'
-    },
-    {
-      id: 'test2',
-      title: 'A later notification',
-      message: 'This was pushed later'
-    }
-  ]
+  notifications: []
 }
 
-const mutations: MutationTree<State> = {
+const mutations: MutationTree<IState> = {
   /* Authorization */
   [Mutations.SHOW_LOGIN_FORM]: state => {
     state.showLoginForm = true
@@ -81,7 +70,7 @@ const mutations: MutationTree<State> = {
   [Mutations.ADD_TRANSFER]: (state, transfer: Transfer) => {
     // Loop through existing transfers and find the first date that is sooner (less) than
     // incoming transfer date.
-    let transferId = state.projects[state.projectId].transfers.findIndex(localTransfer => {
+    const transferId = state.projects[state.projectId].transfers.findIndex(localTransfer => {
       return localTransfer.date.getTime() < transfer.date.getTime()
     })
     if (transferId > -1) {
@@ -93,14 +82,14 @@ const mutations: MutationTree<State> = {
   },
   [Mutations.EDIT_TRANSFER]: (state, transfer: Transfer) => {
     // Update Transfer
-    let transferId = state.projects[state.projectId].transfers.findIndex(localTransfer => {
+    const transferId = state.projects[state.projectId].transfers.findIndex(localTransfer => {
       return localTransfer.id === transfer.id
     })
     Vue.set(state.projects[state.projectId].transfers, transferId, transfer)
   },
   [Mutations.DELETE_TRANSFER]: (state, transfer: Transfer) => {
     // Delete Transfer from array
-    let transferId = state.projects[state.projectId].transfers.findIndex(localTransfer => {
+    const transferId = state.projects[state.projectId].transfers.findIndex(localTransfer => {
       return localTransfer.id === transfer.id
     })
     state.projects[state.projectId].transfers.splice(transferId, 1)
@@ -108,7 +97,9 @@ const mutations: MutationTree<State> = {
   /* Notifications */
   [Mutations.DISPLAY_NOTIFICATION]: (state, notification) => {
     console.log('[NOTIFICATION]', notification)
-    if (!notification.message) throw new Error('[NO MESSAGE:] ' + notification)
+    if (!notification.message) {
+      throw new Error('[NO MESSAGE:] ' + notification)
+    }
     const id = uuidv1()
     state.notifications.unshift({
       id,
@@ -116,8 +107,8 @@ const mutations: MutationTree<State> = {
       message: notification.message
     })
     setTimeout(() => {
-      state.notifications = state.notifications.filter(notification => {
-        return notification.id !== id
+      state.notifications = state.notifications.filter(n => {
+        return n.id !== id
       })
     }, 5000)
   },
@@ -156,10 +147,10 @@ const mutations: MutationTree<State> = {
   }
 }
 
-const actions: ActionTree<State, any> = {
+const actions: ActionTree<IState, any> = {
   [Actions.GET_USER]: async ({ state, commit, dispatch }, userInfo) => {
     try {
-      let user: User = await db.getOrCreateUser(userInfo)
+      const user: User = await db.getOrCreateUser(userInfo)
       // Update local user?
       commit(Mutations.LOGGED_IN, user)
       dispatch(Actions.GET_USER_PROJECTS)
@@ -169,8 +160,10 @@ const actions: ActionTree<State, any> = {
   },
   [Actions.GET_USER_PROJECTS]: async ({ state, commit, dispatch }) => {
     try {
-      if (state.user === undefined) throw new Error('No user')
-      let projects: { [key: string]: Project } = await db.getProjects(state.user.uid)
+      if (state.user === undefined) {
+        throw new Error('No user')
+      }
+      const projects: { [key: string]: Project } = await db.getProjects(state.user.uid)
       if (Object.keys(projects).length === 0) {
         state.noUserProjects = true
       } else {
@@ -192,7 +185,7 @@ const actions: ActionTree<State, any> = {
   },
   [Actions.OPEN_PROJECT]: async ({ state, commit }, projectId) => {
     try {
-      let project = state.projects[projectId]
+      const project = state.projects[projectId]
       // Watch transfers and users
       db.watchProject(project)
       // Make sure currentProjectId is updated
@@ -206,7 +199,9 @@ const actions: ActionTree<State, any> = {
   },
   [Actions.ADD_PROJECT]: async ({ state, commit, dispatch }, title) => {
     try {
-      if (state.user === undefined) throw new Error('No User')
+      if (state.user === undefined) {
+        throw new Error('No User')
+      }
       const newProjectId = await db.addProject(title, state.user)
       state.user.currentProject = newProjectId
       dispatch(Actions.GET_USER_PROJECTS)
@@ -225,7 +220,9 @@ const actions: ActionTree<State, any> = {
   },
   [Actions.ADD_TRANSFER]: async ({ state, commit }, transfer) => {
     try {
-      if (state.user === undefined) throw new Error('No User')
+      if (state.user === undefined) {
+        throw new Error('No User')
+      }
       await db.addTransfer(transfer, state.projectId, state.user.uid)
       commit(Mutations.SELECT_MENU, -1)
       commit(Mutations.DISPLAY_NOTIFICATION, {
@@ -242,7 +239,9 @@ const actions: ActionTree<State, any> = {
   },
   [Actions.ADD_TRANSFERS]: async ({ state, commit }, transfers) => {
     try {
-      if (state.user === undefined) throw new Error('No User')
+      if (state.user === undefined) {
+        throw new Error('No User')
+      }
       await db.addTransfers(transfers, state.projects[state.projectId], state.user.uid)
       commit(Mutations.SELECT_MENU, -1)
       commit(Mutations.DISPLAY_NOTIFICATION, {
@@ -351,7 +350,7 @@ const actions: ActionTree<State, any> = {
   }
 }
 
-const getters: GetterTree<State, any> = {
+const getters: GetterTree<IState, any> = {
   project: state => {
     return state.projects[state.projectId]
   },
@@ -376,8 +375,8 @@ const getters: GetterTree<State, any> = {
 }
 
 // Init store
-const store = new Vuex.Store<State>({
-  state,
+const store = new Vuex.Store<IState>({
+  state: initialState,
   getters,
   actions,
   mutations

@@ -1,9 +1,9 @@
+import Invitations from '../components/Invitations.vue'
+import Login from '../components/Login.vue'
+import Start from '../components/Start.vue'
+import Validate from '../components/Validate.vue'
 import Vue from 'vue'
 import Router from 'vue-router'
-import Start from '@/components/Start'
-import Invitations from '@/components/Invitations'
-import Validate from '@/components/Validate'
-import Login from '@/components/Login'
 
 Vue.use(Router)
 

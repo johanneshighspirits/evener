@@ -20,7 +20,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Store } from 'vuex'
-import { State } from '../Store'
+import { IState } from '../Store'
 import { Component, Watch } from 'vue-property-decorator'
 import { Actions, Mutations } from '../constants'
 import Transfer from '../models/Transfer'

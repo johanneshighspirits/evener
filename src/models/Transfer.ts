@@ -1,10 +1,48 @@
 import { TransferType } from '../types/common'
 import User from './User'
+import firebase from 'firebase'
+
+interface ITransferData {
+  amount: number
+  date: string
+  transferType: number
+  message: string
+  paidBy: string
+  receiver: string
+}
 
 export default class Transfer {
-  date: Date
-  paidBy: User | undefined
-  receiver: User | undefined
+  /**
+   * Return Transfer from firestore doc
+   */
+  public static fromSnapshot = (
+    transferDoc: firebase.firestore.DocumentSnapshot,
+    users: { [key: string]: User }
+  ) => {
+    const transferData = transferDoc.data() as ITransferData
+    const { amount, date, transferType, message, paidBy, receiver } = transferData
+    const paidByUser = users[paidBy]
+    const receiverUser = users[receiver]
+    return new Transfer(
+      transferDoc.id,
+      amount,
+      date,
+      transferType,
+      message,
+      paidByUser,
+      receiverUser
+    )
+  }
+
+  public static sortByDate = (transfers: Transfer[]): Transfer[] => {
+    return transfers.sort((t1, t2) => {
+      return t1.date.getTime() <= t2.date.getTime() ? 1 : -1
+    })
+  }
+
+  public date: Date
+  public paidBy: User | undefined
+  public receiver: User | undefined
   constructor(
     public id: string,
     public amount: number,
@@ -15,11 +53,15 @@ export default class Transfer {
     receiver: User | undefined
   ) {
     this.date = new Date(date)
-    if (paidBy) this.paidBy = paidBy
-    if (receiver) this.receiver = receiver
+    if (paidBy) {
+      this.paidBy = paidBy
+    }
+    if (receiver) {
+      this.receiver = receiver
+    }
   }
 
-  shortDate = () => {
+  public shortDate = () => {
     const options = {
       year: '2-digit',
       month: 'short',
@@ -28,7 +70,7 @@ export default class Transfer {
     return this.date.toLocaleDateString('sv-SE', options).replace('.', '')
   }
 
-  transferTypeToString = () => {
+  public transferTypeToString = () => {
     switch (this.transferType) {
       case TransferType.income:
         return '+'
@@ -42,7 +84,7 @@ export default class Transfer {
     }
   }
 
-  isEqual = (compareTransfer: Transfer): boolean => {
+  public isEqual = (compareTransfer: Transfer): boolean => {
     return (
       compareTransfer.message === this.message &&
       compareTransfer.amount === this.amount &&
@@ -52,16 +94,10 @@ export default class Transfer {
     )
   }
 
-  static sortByDate = (transfers: Transfer[]): Transfer[] => {
-    return transfers.sort((t1, t2) => {
-      return t1.date.getTime() <= t2.date.getTime() ? 1 : -1
-    })
-  }
-
   /**
    * Convert Transfer to prepare for firestore
    */
-  serialize = (uid: string) => {
+  public serialize = (uid: string) => {
     const { date, paidBy, receiver, amount, message, transferType } = this
     return {
       date: date.toISOString(),
@@ -72,27 +108,5 @@ export default class Transfer {
       transferType,
       uid
     }
-  }
-
-  /**
-   * Return Transfer from firestore doc
-   */
-  static fromSnapshot = (
-    transferDoc: firebase.firestore.DocumentSnapshot,
-    users: { [key: string]: User }
-  ) => {
-    let transferData = transferDoc.data()
-    let { amount, date, transferType, message, paidBy, receiver } = transferData
-    let paidByUser = users[paidBy]
-    let receiverUser = users[receiver]
-    return new Transfer(
-      transferDoc.id,
-      amount,
-      date,
-      transferType,
-      message,
-      paidByUser,
-      receiverUser
-    )
   }
 }
