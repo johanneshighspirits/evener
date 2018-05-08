@@ -46,15 +46,21 @@ export default Vue.extend({
           let email = user.email
           let avatar = user.photoURL
           if (!email) {
-            user.providerData.forEach(function(profile) {
+            user.providerData.forEach(profile => {
               if (profile && profile.providerId.includes('google')) {
-                if (!email) email = profile.email
-                if (!avatar) avatar = profile.photoURL
-                if (!name) name = profile.displayName
+                if (!email) {
+                  email = profile.email
+                }
+                if (!avatar) {
+                  avatar = profile.photoURL
+                }
+                if (!name) {
+                  name = profile.displayName
+                }
               }
             })
           }
-          let userInfo = {
+          const userInfo = {
             uid: user.uid,
             name,
             avatar,

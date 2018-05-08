@@ -6,6 +6,7 @@
         <Transfer v-for="(transfer, i) in transfers" :transfer="transfer" :is-last="i === transfers.length - 1" :key="transfer.id"/>
       </transition-group>
     </ul>
+    <p v-else-if="transfers.length === 0">No transfers yet.<br>Choose <b>Add Transfer</b> in the menu to get started.</p>
     <p v-else>Loading transactions...</p>
   </section>
 </template>

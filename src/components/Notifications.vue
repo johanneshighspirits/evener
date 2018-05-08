@@ -30,7 +30,7 @@ export default class Notifications extends Vue {
     return this.$store.state.notifications
   }
   /* Methods */
-  closeNotification(id: string) {
+  public closeNotification(id: string) {
     this.$store.commit(Mutations.CLOSE_NOTIFICATION, id)
   }
 }
@@ -43,7 +43,7 @@ export default class Notifications extends Vue {
   display: flex;
   flex-direction: column;
   position: fixed;
-  width: 240px;
+  width: 280px;
   max-width: 100%;
   margin: 1em;
   z-index: 9999;

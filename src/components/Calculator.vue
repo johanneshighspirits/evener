@@ -14,6 +14,12 @@
         </li>
       </ul>
     </section>
+    <section v-else-if="usersArray.length > 0">
+      <h4>Members</h4>
+      <ul>
+        <li v-for="user in usersArray" :key="user.uid">{{ user.name() }}</li>
+      </ul>
+    </section>
     </transition>
 </template>
 
@@ -34,6 +40,15 @@ export default class Calculator extends Vue {
   get users() {
     return this.$store.getters.users
   }
+  get usersArray() {
+    const users: any[] = []
+    Object.values(this.$store.getters.users).forEach(user => {
+      if (user.hasOwnProperty('name')) {
+        users.push(user)
+      }
+    })
+    return users
+  }
   get transfers() {
     return this.$store.getters.transfers
   }
@@ -43,15 +58,15 @@ export default class Calculator extends Vue {
     /**
      * Map transfers to users
      */
-    let balances: {
+    const balances: {
       [key: string]: { balance: number; name: string; email: string; debts: Debt[] }
     } = {}
     if (this.transfers && this.transfers.length > 0) {
-      let transfers = <Transfer[]>Object.values(this.transfers)
+      const transfers = Object.values(this.transfers) as Transfer[]
       // var to hold all users while we calculate their balances
-      let users = Object.values(this.users) as User[]
+      const users = Object.values(this.users) as User[]
       // Actual count of users (2 == 2 users)
-      let userCount = users.length
+      const userCount = users.length
       users.forEach((user: User) => {
         const userId = user.uid
         // Init user balance
@@ -118,7 +133,7 @@ export default class Calculator extends Vue {
               const amount =
                 leftToPay * -1 >= receiverBalance.balance ? receiverBalance.balance : leftToPay * -1
               leftToPay += amount
-              let debt = {
+              const debt = {
                 amount,
                 receiver
               }

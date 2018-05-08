@@ -137,6 +137,7 @@ const mutations: MutationTree<IState> = {
   },
   [Mutations.INCREMENT_INVITE_STATUS]: state => {
     state.inviteStatus += 1
+    console.log(`state.inviteStatus: ${state.inviteStatus}`)
   },
   [Mutations.DISPLAY_INVITE_HELP]: (state, displayInviteHelp) => {
     state.displayInviteHelp = displayInviteHelp

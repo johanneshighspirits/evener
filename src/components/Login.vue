@@ -34,7 +34,7 @@ export default Vue.extend({
     }
   },
   mounted() {
-    let ui = new firebaseui.auth.AuthUI(firebase.auth())
+    const ui = new firebaseui.auth.AuthUI(firebase.auth())
     firebase.auth().useDeviceLanguage()
     ui.start('#firebaseui-auth-container', {
       signInSuccessUrl: this.successUrl || '/',
