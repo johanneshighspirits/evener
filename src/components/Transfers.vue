@@ -1,13 +1,13 @@
 <template>
   <section class="transfers-section">
     <h4>Transfers</h4>
-    <ul v-if="transfers.length > 0" class="transfers">
+    <p v-if="isOpening">Loading transactions...</p>
+    <ul v-else-if="transfers.length > 0" class="transfers">
       <transition-group name="fade-in-left">
         <Transfer v-for="(transfer, i) in transfers" :transfer="transfer" :is-last="i === transfers.length - 1" :key="transfer.id"/>
       </transition-group>
     </ul>
-    <p v-else-if="transfers.length === 0">No transfers yet.<br>Choose <b>Add Transfer</b> in the menu to get started.</p>
-    <p v-else>Loading transactions...</p>
+    <p v-else>No transfers yet.<br>Choose <b>Add Transfer</b> in the menu to get started.</p>
   </section>
 </template>
 
@@ -25,6 +25,9 @@ import { Component, Prop } from 'vue-property-decorator'
 export default class Transfers extends Vue {
   get transfers() {
     return this.$store.getters.transfers
+  }
+  get isOpening() {
+    return this.$store.getters.isOpening
   }
 }
 </script>

@@ -149,6 +149,7 @@ class FirestoreDatabaseConnection {
           .doc(project.id)
           .collection(Collections.TRANSFERS)
           .onSnapshot(snapshot => {
+            this.store.commit(Mutations.OPENING_PROJECT, false)
             snapshot.docChanges.forEach(change => {
               const transfer = Transfer.fromSnapshot(change.doc, project.users)
               const transferId = change.doc.id

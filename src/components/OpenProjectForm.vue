@@ -6,6 +6,7 @@
       <div>
         <button
           class="button"
+          style="margin-right: 4px;"
           v-for="project in projects"
           v-if="project.id !== currentProject.id"
           @click="openProject"
@@ -39,7 +40,7 @@ export default class OpenProjectForm extends Vue {
     return this.$store.getters.project
   }
   /* Methods */
-  openProject(e: HTMLButtonEvent) {
+  public openProject(e: HTMLButtonEvent) {
     const projectId = e.target.id
     this.$store.dispatch(Actions.OPEN_PROJECT, projectId)
   }

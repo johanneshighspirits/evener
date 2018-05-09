@@ -14,6 +14,7 @@ export interface IState {
   projects: { [key: string]: Project }
   noUserProjects: boolean
   projectId: string
+  isOpening: boolean
   inviteLink: string
   inviteTimedOut: boolean
   displayInviteHelp: boolean
@@ -31,6 +32,7 @@ const initialState: IState = {
   projects: {},
   noUserProjects: false,
   projectId: '',
+  isOpening: true,
   inviteTimedOut: false,
   displayInviteHelp: false,
   inviteLink: '',
@@ -62,6 +64,9 @@ const mutations: MutationTree<IState> = {
   },
   [Mutations.NO_PROJECTS_FOUND]: state => {
     state.noUserProjects = true
+  },
+  [Mutations.OPENING_PROJECT]: (state, isOpening) => {
+    state.isOpening = isOpening
   },
   [Mutations.UPDATE_PROJECT_ID]: (state, projectId) => {
     state.projectId = projectId
@@ -188,6 +193,7 @@ const actions: ActionTree<IState, any> = {
     try {
       const project = state.projects[projectId]
       // Watch transfers and users
+      commit(Mutations.OPENING_PROJECT, true)
       db.watchProject(project)
       // Make sure currentProjectId is updated
       if (state.user && state.user.currentProject !== projectId) {
@@ -358,13 +364,22 @@ const getters: GetterTree<IState, any> = {
   projects: state => {
     return state.projects
   },
+  isOpening: state => {
+    return state.isOpening
+  },
   transfers: state => {
+    if (!state.projects[state.projectId]) {
+      return
+    }
     return state.projects[state.projectId].transfers
   },
   user: state => {
     return state.user
   },
   users: state => {
+    if (!state.projects[state.projectId]) {
+      return
+    }
     return state.projects[state.projectId].users
   },
   showContextMenu: state => {
