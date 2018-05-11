@@ -25,7 +25,7 @@ import { Component } from 'vue-property-decorator'
 import { Actions } from '../constants'
 import { Project } from '../types/common'
 
-interface HTMLButtonEvent extends Event {
+interface IHTMLButtonEvent extends Event {
   target: HTMLButtonElement & EventTarget
 }
 
@@ -40,7 +40,7 @@ export default class OpenProjectForm extends Vue {
     return this.$store.getters.project
   }
   /* Methods */
-  public openProject(e: HTMLButtonEvent) {
+  public openProject(e: IHTMLButtonEvent) {
     const projectId = e.target.id
     this.$store.dispatch(Actions.OPEN_PROJECT, projectId)
   }

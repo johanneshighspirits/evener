@@ -1,7 +1,9 @@
 <template>
-  <li class="transfer-container" :class="{ last: isLast }" @contextmenu="handleContextMenu">
+<v-touch @press="handlePress">
+  <li class="transfer-container" :class="{ last: isLast }"
+  @contextmenu="handleContextMenu">
     <div class="transfer transfer-paid-by" :style="'background-image: url(' + avatar + ')'">
-      <span>{{ initials }}</span>
+      <span>{{ initials }} {{ email }}</span>
     </div>
     <div class="transfer transfer-date">{{ transfer.shortDate() }}</div>
     <div class="transfer transfer-transfer-type">
@@ -10,6 +12,7 @@
     <div class="transfer transfer-message">{{ transfer.message }}</div>
     <div class="transfer transfer-amount">{{ transfer.amount }}</div>
   </li>
+</v-touch>
 </template>
 
 <script lang="ts">
@@ -21,7 +24,7 @@ import { Mutations, Actions } from '../constants'
 import { TransferType } from '../types/common'
 
 export default Vue.extend({
-  name : 'transfer',
+  name: 'transfer',
   props: {
     transfer: {
       type: Transfer,
@@ -33,22 +36,43 @@ export default Vue.extend({
     }
   },
   computed: {
-    initials: function(): string {
+    initials(): string {
       const { transferType, paidBy, receiver } = this.transfer
       let receiverOrPayer: User | undefined = paidBy
-      if (transferType === TransferType.income) receiverOrPayer = receiver
+      if (transferType === TransferType.income) {
+        receiverOrPayer = receiver
+      }
       return receiverOrPayer !== undefined ? receiverOrPayer.initials() : '--'
     },
-    avatar: function(): string {
+    email(): string {
       const { transferType, paidBy, receiver } = this.transfer
       let receiverOrPayer: User | undefined = paidBy
-      if (transferType === TransferType.income) receiverOrPayer = receiver
+      console.table(this.transfer)
+      if (transferType === TransferType.income) {
+        receiverOrPayer = receiver
+      }
+      return receiverOrPayer !== undefined ? receiverOrPayer.email : '--'
+    },
+    avatar(): string {
+      const { transferType, paidBy, receiver } = this.transfer
+      let receiverOrPayer: User | undefined = paidBy
+      if (transferType === TransferType.income) {
+        receiverOrPayer = receiver
+      }
       return receiverOrPayer !== undefined ? receiverOrPayer.avatar : ''
     }
     // ...mapGetters(['showContextMenu'])
   },
   methods: {
+    handlePress(e: PointerEvent) {
+      e.preventDefault()
+      this.showEditMenu(e.clientX, e.clientY)
+    },
     handleContextMenu(e: MouseEvent) {
+      e.preventDefault()
+      this.showEditMenu(e.clientX, e.clientY)
+    },
+    showEditMenu(x: number, y: number) {
       const transferOwner =
         this.transfer.transferType === TransferType.income
           ? this.transfer.receiver!.uid
@@ -56,12 +80,14 @@ export default Vue.extend({
       if (this.$store.state.user.uid !== transferOwner) {
         // Only allow edit/delete on user's own transfers
         return false
+      } else {
+        console.log(this.$store.state.user.uid)
+        console.log(this.transfer)
       }
-      e.preventDefault()
-      let menu = {
+      const menu = {
         title: this.transfer.message,
-        x: e.clientX,
-        y: e.clientY,
+        x,
+        y,
         items: [
           {
             text: 'Edit transfer',
@@ -76,7 +102,9 @@ export default Vue.extend({
             text: 'Delete',
             action: () => {
               const id = this.transfer.id
-              let doDelete = confirm(`Are you sure you want to delete '${this.transfer.message}'?`)
+              const doDelete = confirm(
+                `Are you sure you want to delete '${this.transfer.message}'?`
+              )
               if (doDelete) {
                 this.$store.dispatch(Actions.DELETE_TRANSFER, id)
               }

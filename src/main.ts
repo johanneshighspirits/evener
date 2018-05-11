@@ -5,12 +5,14 @@ import firebase from 'firebase'
 import 'firebase/firestore'
 import firebaseui from 'firebaseui'
 import Vue from 'vue'
+import VueTouch from 'vue-touch'
 import App from './App.vue'
 import { Actions, Mutations } from './constants'
 import { config } from './firebaseConfig'
 import router from './router'
 import store from './Store'
 
+Vue.use(VueTouch)
 Vue.config.productionTip = false
 
 // Check that service workers are registered
