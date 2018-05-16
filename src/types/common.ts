@@ -25,11 +25,18 @@ export interface UserInfo {
   currentProject: string
 }
 
+export interface UserGroup {
+  uid: string
+  name: string
+  userIds: string[]
+}
+
 export interface Project {
   id: string
   title: string
   transfers: Transfer[]
   users: { [key: string]: User }
+  userGroups?: UserGroup[]
 }
 
 export interface Invitation {
@@ -41,7 +48,7 @@ export interface Invitation {
 
 export interface Debt {
   amount: number
-  receiver: User
+  receiverName: string
 }
 
 export interface Notification {

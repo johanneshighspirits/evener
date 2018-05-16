@@ -4,8 +4,7 @@ import { Collections, Mutations } from './constants'
 import Transfer from './models/Transfer'
 import User from './models/User'
 import { IState } from './Store'
-import { Project, TransferType } from './types/common'
-import { Invitation, UserInfo } from './types/common'
+import { Project, TransferType, Invitation, UserInfo } from './types/common'
 
 // interface FirestoreDatabaseConnection {
 //   // Store a reference to vuex store
@@ -85,6 +84,23 @@ class FirestoreDatabaseConnection {
     })
   }
 
+  public storeProjectUserGroups = (uid: string, userGroups: any[]) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const projectsRef = await this.getCollectionRef(Collections.PROJECTS)
+        const project = await projectsRef.doc(uid).update({
+          userGroups
+        })
+        return resolve()
+      } catch (error) {
+        console.log(error)
+        console.log('Could not save project')
+        debugger
+        return reject()
+      }
+    })
+  }
+
   public getProjects = (uid: string): Promise<{ [key: string]: Project }> => {
     return new Promise(async (resolve, reject) => {
       try {
@@ -92,12 +108,13 @@ class FirestoreDatabaseConnection {
         const userProjects = await projectsRef.where(`users.${uid}`, '==', true).get()
         const projects: { [key: string]: Project } = {}
         userProjects.forEach(projectSnapshot => {
-          const { title, users } = projectSnapshot.data()
+          const { title, users, userGroups } = projectSnapshot.data()
           const project: Project = {
             id: projectSnapshot.id,
             title,
             transfers: [],
-            users
+            users,
+            userGroups
           }
           projects[`${projectSnapshot.id}`] = project
         })
@@ -443,7 +460,7 @@ class FirestoreDatabaseConnection {
             let email = firebaseUser.email
             let avatar = firebaseUser.photoURL
             if (!email || !name || !avatar) {
-              firebaseUser.providerData.forEach(function(profile) {
+              firebaseUser.providerData.forEach(profile => {
                 if (profile && profile.providerId.includes('google')) {
                   if (!email) {
                     email = profile.email || ''

@@ -6,7 +6,7 @@
           <p>MENU</p>
         </div>
         <div v-else>
-          <p class="closer" @click="showMenu = false">X</p>
+          <p class="closer" @click="closeMenu()">X</p>
           <ul>
             <li v-for="(item, i) in menuItems" :key="i" @click="selectMenuItem(i)">{{ item }}</li>
           </ul>
@@ -20,6 +20,7 @@
           <invite-collaborator-form v-else-if="menuSelection == 2"/>
           <open-project-form v-else-if="menuSelection == 3" />
           <create-project-form v-else-if="menuSelection == 4" />
+          <create-team-form v-else-if="menuSelection == 5" />
         </transition>
         <calculator/>
         <transfers/>
@@ -43,6 +44,7 @@ import Calculator from './Calculator.vue'
 import AddTransferForm from './AddTransferForm.vue'
 import AddTransfersForm from './AddTransfersForm.vue'
 import CreateProjectForm from './CreateProjectForm.vue'
+import CreateTeamForm from './CreateTeamForm.vue'
 import OpenProjectForm from './OpenProjectForm.vue'
 import InviteCollaboratorForm from './InviteCollaboratorForm.vue'
 import { Project } from '../types/common'
@@ -57,7 +59,8 @@ export default Vue.extend({
         'Add Transfers',
         'Share Project',
         'Open Project',
-        'Create Project'
+        'Create Project',
+        'Create Team'
       ]
     }
   },
@@ -67,6 +70,7 @@ export default Vue.extend({
     AddTransferForm,
     AddTransfersForm,
     CreateProjectForm,
+    CreateTeamForm,
     OpenProjectForm,
     InviteCollaboratorForm
   },
@@ -90,6 +94,10 @@ export default Vue.extend({
         this.$store.commit(Mutations.SELECT_MENU, item)
         // this.menuSelection = item
       }
+      this.showMenu = false
+    },
+    closeMenu() {
+      this.$store.commit(Mutations.SELECT_MENU, -1)
       this.showMenu = false
     }
   }

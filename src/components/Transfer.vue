@@ -3,7 +3,7 @@
   <li class="transfer-container" :class="{ last: isLast }"
   @contextmenu="handleContextMenu">
     <div class="transfer transfer-paid-by" :style="'background-image: url(' + avatar + ')'">
-      <span>{{ initials }} {{ email }}</span>
+      <span>{{ initials }}</span>
     </div>
     <div class="transfer transfer-date">{{ transfer.shortDate() }}</div>
     <div class="transfer transfer-transfer-type">
@@ -44,15 +44,6 @@ export default Vue.extend({
       }
       return receiverOrPayer !== undefined ? receiverOrPayer.initials() : '--'
     },
-    email(): string {
-      const { transferType, paidBy, receiver } = this.transfer
-      let receiverOrPayer: User | undefined = paidBy
-      console.table(this.transfer)
-      if (transferType === TransferType.income) {
-        receiverOrPayer = receiver
-      }
-      return receiverOrPayer !== undefined ? receiverOrPayer.email : '--'
-    },
     avatar(): string {
       const { transferType, paidBy, receiver } = this.transfer
       let receiverOrPayer: User | undefined = paidBy
@@ -80,9 +71,6 @@ export default Vue.extend({
       if (this.$store.state.user.uid !== transferOwner) {
         // Only allow edit/delete on user's own transfers
         return false
-      } else {
-        console.log(this.$store.state.user.uid)
-        console.log(this.transfer)
       }
       const menu = {
         title: this.transfer.message,

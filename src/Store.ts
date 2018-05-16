@@ -225,6 +225,22 @@ const actions: ActionTree<IState, any> = {
       })
     }
   },
+  [Actions.UPDATE_USER_GROUPS]: async ({ state, commit, dispatch }, project) => {
+    try {
+      const result = await db.storeProjectUserGroups(project.id, project.userGroups)
+      commit(Mutations.SELECT_MENU, -1)
+      commit(Mutations.DISPLAY_NOTIFICATION, {
+        title: `Teams saved`,
+        message: 'Great work!'
+      })
+    } catch (error) {
+      debugger
+      commit(Mutations.DISPLAY_NOTIFICATION, {
+        title: 'ERROR',
+        message: error
+      })
+    }
+  },
   [Actions.ADD_TRANSFER]: async ({ state, commit }, transfer) => {
     try {
       if (state.user === undefined) {
