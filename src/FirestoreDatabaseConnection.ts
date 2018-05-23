@@ -88,9 +88,15 @@ class FirestoreDatabaseConnection {
     return new Promise(async (resolve, reject) => {
       try {
         const projectsRef = await this.getCollectionRef(Collections.PROJECTS)
-        const project = await projectsRef.doc(uid).update({
-          userGroups
-        })
+        if (userGroups) {
+          await projectsRef.doc(uid).update({
+            userGroups
+          })
+        } else {
+          await projectsRef.doc(uid).update({
+            userGroups: firebase.firestore.FieldValue.delete()
+          })
+        }
         return resolve()
       } catch (error) {
         console.log(error)

@@ -21,6 +21,7 @@
           <open-project-form v-else-if="menuSelection == 3" />
           <create-project-form v-else-if="menuSelection == 4" />
           <create-team-form v-else-if="menuSelection == 5" />
+          <edit-team-form v-else-if="menuSelection == 6" />
         </transition>
         <calculator/>
         <transfers/>
@@ -45,6 +46,7 @@ import AddTransferForm from './AddTransferForm.vue'
 import AddTransfersForm from './AddTransfersForm.vue'
 import CreateProjectForm from './CreateProjectForm.vue'
 import CreateTeamForm from './CreateTeamForm.vue'
+import EditTeamForm from './EditTeamForm.vue'
 import OpenProjectForm from './OpenProjectForm.vue'
 import InviteCollaboratorForm from './InviteCollaboratorForm.vue'
 import { Project } from '../types/common'
@@ -60,7 +62,8 @@ export default Vue.extend({
         'Share Project',
         'Open Project',
         'Create Project',
-        'Create Team'
+        'Create Team',
+        'Edit Team'
       ]
     }
   },
@@ -71,6 +74,7 @@ export default Vue.extend({
     AddTransfersForm,
     CreateProjectForm,
     CreateTeamForm,
+    EditTeamForm,
     OpenProjectForm,
     InviteCollaboratorForm
   },

@@ -230,7 +230,7 @@ const actions: ActionTree<IState, any> = {
       const result = await db.storeProjectUserGroups(project.id, project.userGroups)
       commit(Mutations.SELECT_MENU, -1)
       commit(Mutations.DISPLAY_NOTIFICATION, {
-        title: `Teams saved`,
+        title: `Teams updated`,
         message: 'Great work!'
       })
     } catch (error) {

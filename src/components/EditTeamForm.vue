@@ -1,16 +1,22 @@
 <template>
   <form class="create-user-groups-form form">
-    <h3>Member teams</h3>
-    <p>Create a new team to group members together. A team will count as one and all its expenses and incomes will be equally split among its members.</p>
+    <h3>Edit teams</h3>
     <p>{{ title }}</p>
+    <div>
+      <button
+        class="button"
+        v-for="team in userGroups"
+        @click.prevent="selectTeam(team.uid)"
+        :id="team.uid"
+        :key="team.uid">
+        {{ team.name }}
+      </button>
+    </div>
+
     <transition name="fade-in-up">
-      <div class="form-group">
-        <input type="text" class="bordered" autofocus="true" v-model="name" placeholder="Team name">
-      </div>
-    </transition>
-    <transition name="fade-in-up">
-      <div v-if="name !== ''" class="form-group">
-        <p>Select one or more members, then click CREATE TEAM</p>
+      <div v-if="selectedTeam !== '' && freeUsers.length > 0" class="form-group">
+        <h3>Add user to team</h3>
+        <p>Select one or more members to add to the team</p>
         <div v-for="user in freeUsers" :key="user.uid" class="form-group">
           <input type="checkbox" :id="user.uid" :value="user.uid" v-model="checkedUserIds">
           <label class="button" :for="user.uid">{{ user.name() }}</label>
@@ -18,9 +24,26 @@
         <button
           class="button"
           style="margin-top:2em; font-size:14px;"
-          @click.prevent="addUserGroup">
-          CREATE TEAM
+          @click.prevent="addUsersToGroup">
+          ADD TO TEAM
         </button>
+
+      </div>
+    </transition>
+    <transition name="fade-in-up">
+      <div v-if="selectedTeam !== '' && userGroups.find(group => group.uid === selectedTeam)" class="form-group">
+        <h3>Remove user from team</h3>
+        <p>Click a member to instantly remove them from the team</p>
+        <div v-for="user in selectedTeamUsers" :key="user.uid" class="form-group">
+          <input type="checkbox" :id="user.uid" @click="removeUserFromGroup(user.uid)" :value="user.uid">
+          <label class="button" :for="user.uid">{{ user.name() }}</label>
+        </div>
+        <!-- <button
+          class="button"
+          style="margin-top:2em; font-size:14px;"
+          @click.prevent="addUsersToGroup">
+          ADD TO TEAM
+        </button> -->
 
       </div>
     </transition>
@@ -33,17 +56,23 @@ import { Component, Watch } from 'vue-property-decorator'
 import { Actions, Mutations } from '../constants'
 import { UserGroup } from '../types/common'
 import User from '../models/User'
-import uuidv1 from 'uuid/v1'
+// import uuidv1 from 'uuid/v1'
 
 @Component
-export default class CreateTeamForm extends Vue {
+export default class EditTeamForm extends Vue {
   /* data */
-  public name: string = ''
   public checkedUserIds: string[] = []
+  public selectedTeam: string = '';
+  public addUser: boolean = true;
+
+  constructor() {
+    super()
+    this.addUser = this.freeUsers.length > 0
+  }
 
   /* Computed values (getters) */
   get title() {
-    return 'Start by choosing a team name.'
+    return 'Select a team to add or remove a member from.'
   }
   get project() {
     return this.$store.getters.project
@@ -63,14 +92,27 @@ export default class CreateTeamForm extends Vue {
     })
     return freeUsers
   }
+  get selectedTeamUsers() {
+    if (this.selectedTeam === '') {
+      return []
+    }
+    const team = this.userGroups.find((group: UserGroup) => group.uid === this.selectedTeam)
+    if (!team) {
+      return []
+    }
+    return this.users.filter((user: User) => team.userIds.includes(user.uid))
+  }
   /* Methods */
+  public selectTeam(teamUid:string) {
+    this.$data.selectedTeam = teamUid;
+  }
   public resetForm() {
-    this.$data.name = ''
+    this.$data.selectedGroup = ''
     this.$data.checkedUserIds = []
   }
   public validateForm() {
-    if (this.$data.name === '') {
-      console.error("Name can't be blank")
+    if (this.$data.selectedGroup === '') {
+      console.error("Select a team")
       return false
     }
     if (this.$data.checkedUserIds.length < 1) {
@@ -79,18 +121,35 @@ export default class CreateTeamForm extends Vue {
     }
     return true
   }
-  public addUserGroup() {
+  public addUsersToGroup() {
+    const newUsers = [...this.$data.checkedUserIds]
     if (!this.validateForm()) {
       return null
     }
-    this.project.userGroups = this.project.userGroups || []
-    this.project.userGroups.push({
-      uid: uuidv1(),
-      name: this.$data.name,
-      userIds: this.$data.checkedUserIds
-    })
-    this.$store.dispatch(Actions.UPDATE_USER_GROUPS, this.project)
-    this.resetForm()
+    const selectedGroup = this.project.userGroups.find((group: UserGroup) => group.uid === this.selectedTeam)
+    if (selectedGroup) {
+      selectedGroup.userIds = [...selectedGroup.userIds, ...this.$data.checkedUserIds]
+      this.$store.dispatch(Actions.UPDATE_USER_GROUPS, this.project)
+      this.resetForm()
+    }
+  }
+  public removeUserFromGroup(uid: string) {
+    const selectedGroup = this.project.userGroups.find((group: UserGroup) => group.uid === this.selectedTeam)
+    if (selectedGroup) {
+      selectedGroup.userIds = selectedGroup.userIds.filter((userId: string) => {
+        return userId !== uid
+      })
+      if (selectedGroup.userIds.length < 1) {
+        // Don't save empty teams
+        this.project.userGroups = this.project.userGroups.filter((group: UserGroup) => group.uid !== this.selectedTeam)
+        if (this.project.userGroups.length < 1) {
+          // Remove userGroup property if empty
+          this.project.userGroups = undefined
+        }
+      }
+      this.$store.dispatch(Actions.UPDATE_USER_GROUPS, this.project)
+      this.resetForm()
+    }
   }
 }
 </script>
