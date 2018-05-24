@@ -5,7 +5,8 @@
   "author": "Johannes Borgström <johannes@highspirits.se>",
   "private": true,
   "scripts": {
-    "dev": "nodemon -w build/webpack.dev.conf.js -x webpack-dev-server -- --inline --progress --config build/webpack.dev.conf.js",
+    "dev":
+      "nodemon -w build/webpack.dev.conf.js -x webpack-dev-server -- --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "serve": "cd dist && http-server -p 6789",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
@@ -13,7 +14,7 @@
     "test": "npm run unit && npm run e2e",
     "sw": "workbox generateSW",
     "build": "node build/build.js",
-    "release": "yarn build && firebase deploy"
+    "release": "yarn build && yarn sw && firebase deploy"
   },
   "dependencies": {
     "@types/uuid": "^3.4.3",
@@ -92,9 +93,5 @@
     "node": ">= 6.0.0",
     "npm": ">= 3.0.0"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"]
 }
