@@ -239,6 +239,8 @@ $red: rgb(223, 121, 121);
     list-style: none;
   }
   .debt-box {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
     margin: 1px;
     h5 {
@@ -248,6 +250,7 @@ $red: rgb(223, 121, 121);
       color: #fff;
       font-size: 1.5em;
       padding: 0;
+      flex-grow: 1;
       @media screen and (min-width: 400px) {
         font-size: 2em;
         padding: 0.2em;
