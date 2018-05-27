@@ -30,4 +30,15 @@ yarn test
 yarn release
 ```
 
+### Service Worker
+
+We're using Google Workbox and workbox-webpack-plugin to manage service worker creation and updating.
+https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin
+
+---
+
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+```
+
+```

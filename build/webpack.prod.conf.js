@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const WorkboxPlugin = require('workbox-webpack-plugin')
 
 const env =
   process.env.NODE_ENV === 'testing' ? require('../config/test.env') : require('../config/prod.env')
@@ -115,7 +116,31 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    new WorkboxPlugin.GenerateSW({
+      swDest: 'sw.js',
+      // Exclude images from the precache
+      exclude: [/\.(?:png|jpg|jpeg|svg)$/],
+
+      // Define runtime caching rules.
+      runtimeCaching: [
+        {
+          // Match any request ends with .png, .jpg, .jpeg or .svg.
+          urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+
+          // Apply a cache-first strategy.
+          handler: 'cacheFirst',
+
+          options: {
+            cacheName: 'img-cache',
+            // Only cache 10 images.
+            expiration: {
+              maxEntries: 10
+            }
+          }
+        }
+      ]
+    })
   ]
 })
 
